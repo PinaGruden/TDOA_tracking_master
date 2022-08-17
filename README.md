@@ -1,10 +1,13 @@
-# TDOA_tracking_master
-Package for tracking Time-Difference-Of-Arrivals from two sensors
+# TDOA tracking package
 
-TDOA_tracking_master is a Matlab package for tracking Time-Differences-Of-Arrivals (TDOAs) based on two sensors from towed hydrophone array.
+A Matlab set of functions and scripts for multi-target tracking of Time-Differences-Of-Arrivals (TDOAs) of signals between two sensors from towed hydrophone array recordings.
 
 For details see Gruden, P.,  Nosal, E.-M. and Oleson, E. (2021). Tracking time differences of arrivals of multiple sound sources in the presence of clutter and missed detections. The Journal of the Acoustical Society of America  150(5): 3399--3416.
 
+Copyright (c) 2021, Pina Gruden
+
+
+## How to use
 
 Before running the package specify the paths and parameters for your application by modifying the: 
 - Specify_Parameters.m - if needed change any parameters in the sections labeled “ CHANGABLE:” 
