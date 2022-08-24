@@ -11,13 +11,13 @@ end
 
 % ~~~~~~~~~~~~~~~~~~~~~~~CHANGABLE:~~~~~~~~~~~~~~~~~~~~~~~~
 %Specify survey year
-parameters.year=2017;
+parameters.year=2021;
 
 %Specify array name
-parameters.arrayname= 'Numbat_20m_Goanna';
+parameters.arrayname= 'Kolea_30m_Pueo';
 
 %Specify ENCOUNTER:
-parameters.encounter= 'Lasker_AC276'; %sperm whale A196 uses numbat_gonna array so the same as Lasker AC191
+parameters.encounter= 'AC_50'; %sperm whale A196 uses numbat_gonna array so the same as Lasker AC191
 
 % Specify speed of sound
 parameters.c=1500; 
@@ -127,13 +127,13 @@ parameters.lambda = sqrt(-2*log(0.001)); %Threshold lambda- we assume p_{FA}=0.0
 
 % Specify if you wish to exclude certain bearings in front of the array in
 %order to avoid cross-correlation peaks due to the boat:
-parameters.excl_deg = 10; % Cut off for bearings in degrees- e.g. 
+parameters.excl_deg = 15; % Cut off for bearings in degrees- e.g. 
 % no bering smaller than 10 degrees will be considered
 
 % Specify maximum time (in s) to be considered in the noise sample- 
 %   time from the beggining of the encounter up to before any significant 
 %   sources occur (e.g. 1000s).
-parameters.tmax=100;
+parameters.tmax=300;
 
 % Specify minimum distance between two neighbouring cross-correlation peaks
 parameters.min_dist=0.0031; % For FKW whistles- based on the simulation for

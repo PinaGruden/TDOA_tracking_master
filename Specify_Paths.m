@@ -2,10 +2,10 @@ function [folder, folder2save2] = Specify_Paths
 %CONFIGURE PATHS to recordings & folder to save measurements to:
 
 % Path to Raw data:
-folder ='G:\Lasker_AC276_FKW_sample\';
+folder ='/Volumes/Acoustics/Acoustic_Recordings/NOAA/MACS2021_TA/AC_50/';
 
 % Path to folder where things will be stored:
-folder2save2='C:\Users\Pina\Dropbox\Pina\HAWAII\MATLAB\Code\TDOA_tracking_master\test_meas\';
+folder2save2='/Users/pinagruden/Dropbox/Pina/HAWAII/MATLAB/Test_TDOATrackingPackage/MACS2021_TA/AC_50/';
 
 
 end
