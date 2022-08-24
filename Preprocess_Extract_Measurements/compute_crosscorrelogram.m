@@ -79,10 +79,12 @@ Nstepsmissing=seconds(actual_gaps(index)-expected_gaps(index))./dt;
 % 
 % [~,fs]=audioread([file1(1).folder,'/',file1(1).name]);
 
-M=(seconds(timestamps(end)-timestamps(1))+duration_file(end))./dt;
+M=round((seconds(timestamps(end)-timestamps(1))+duration_file(end))./dt);
 
 fs=info.SampleRate; %this assumes all files have the same sampling rate
-L=window_length_s*fs;
+L= (d/c*1.1)*2*fs; %cross-correlogram lags are limited by the sensor 
+% separation- the lags will be between -d/c and d/c and we add 10% on top 
+% in case distance is not accurately measured
 
 Rxy_envelope_ALL= zeros(L,M);
 
