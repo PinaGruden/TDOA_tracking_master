@@ -28,7 +28,7 @@ addpath(genpath(folder_code));
 
 
 %% 3) EXTRACTION OF MEASUREMENTS:
-
+disp('Extracting measurements')
 [measure_clicks,Rxy_envelope_scaled_clicks,scalar_clicks] = extract_measure_crosscorrelogram(...
     Rxy_envelope_ALL_clicks,lags,t, parameters.lambda, parameters.excl_lags,...
     parameters.tmax,parameters.min_dist);
@@ -40,7 +40,7 @@ addpath(genpath(folder_code));
 measure.T=measure_clicks.T;
 measure.Z= cellfun(@(x,y) [x,y],measure_clicks.Z,measure_whistles.Z,'UniformOutput',false);
 %% 4) TRACK TDOAS:
-
+disp('Tracking TDOAs from measurements')
 % Generate tracking models:
 load('BayesOptimization_GMPHDParams_GTchunked_lambda4_5_DiffBirth.mat')
 load('BirthVelocityPrior_AllTrainData.mat')
@@ -55,7 +55,7 @@ Track = tracktarget_tdoa_labels(Est.Tag,Est.X,model);
 
 
 %% 5) PLOT:
-
+disp('Plotting results')
 plot_results(t_serialdate,lags,{Rxy_envelope_scaled_clicks,Rxy_envelope_scaled_whistles},measure,Tracks, parameters)
 
 %% 6) SAVE WORKSPACE with results &  measureemnts
