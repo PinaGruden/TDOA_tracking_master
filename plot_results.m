@@ -16,6 +16,7 @@ switch parameters.signal_type
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
         title(['Cross-correlogram based on ', parameters.signal_type])
         set(gca,'FontSize',12)
+        caxis([0,10])
         im.AlphaData = 0.5; % change this value to change the background image transparency
 %         axis square;
         hold all;
@@ -27,6 +28,7 @@ switch parameters.signal_type
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
         set(gca,'FontSize',12)
+        caxis([0,10])
         im1.AlphaData = 0.5; % change this value to change the foreground image transparency
 %         axis square;
         %link axes
@@ -53,8 +55,9 @@ switch parameters.signal_type
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
         title(['Cross-correlogram based on ', parameters.signal_type])
         set(gca,'FontSize',12)
+        caxis([0,10])
         im.AlphaData = 0.5; % change this value to change the background image transparency
-        axis square;
+%         axis square;
         hold all;
         %plot second data
         ax2 = axes;
@@ -64,8 +67,9 @@ switch parameters.signal_type
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
         set(gca,'FontSize',12)
+        caxis([0,10])
         im1.AlphaData = 0.5; % change this value to change the foreground image transparency
-        axis square;
+%         axis square;
         %link axes
         linkaxes([ax1,ax2])
         %%Hide the top axes
@@ -78,22 +82,26 @@ switch parameters.signal_type
        
         
         %plot measurements
-        hold on
-        for k=1:measure.T
-            if ~isempty(measure.Z{k})
-                plot(t_serialdate(k),measure.Z{k}(1,:),'ro')
-            end
-        end
+%         hold on
+%         for k=1:measure.T
+%             if ~isempty(measure.Z{k})
+%                 plot(t_serialdate(k),measure.Z{k}(1,:),'ro')
+%             end
+%         end
 
         %plot tracked TDOAs
+        hold on
         for k=1:size(Tracks,2)
             plot(Tracks(k).time_local, Tracks(k).tdoa,'-','LineWidth',3)
         end
         datetick('x','keeplimits');
 
-        h(1) = plot(NaN, NaN,'ro','LineWidth',2);
-        h(2) = plot(NaN, NaN,'b-','LineWidth',2);
-        legend(h,'Measurements','Tracked TDOAs','Location', 'southeastoutside');
+%         h(1) = plot(NaN, NaN,'ro','LineWidth',2);
+%         h(2) = plot(NaN, NaN,'b-','LineWidth',2);
+%         legend(h,'Measurements','Tracked TDOAs','Location', 'southeastoutside');
+
+        h(1) = plot(NaN, NaN,'b-','LineWidth',2);
+        legend(h,'Tracked TDOAs','Location', 'southeastoutside');
 
         set(gca,'FontSize',14)
         set(findall(gcf,'type','text'),'FontSize',14)
