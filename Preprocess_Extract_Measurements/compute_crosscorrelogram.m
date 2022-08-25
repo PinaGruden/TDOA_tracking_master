@@ -94,6 +94,7 @@ start=1;
        
         %% Read the WAV file
         file=file1(k).name;
+        disp(['Computing ', signal_type,' cross-correlogram for file ',file])
         [x,fs]=audioread([file1(k).folder,'/',file]);
         %Select the two channels to process
         x = x(:,channels);
