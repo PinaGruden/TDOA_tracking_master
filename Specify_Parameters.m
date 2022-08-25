@@ -17,7 +17,7 @@ parameters.year=2021;
 parameters.arrayname= 'Kolea_30m_Pueo';
 
 %Specify ENCOUNTER:
-parameters.encounter= 'AC_50'; %sperm whale A196 uses numbat_gonna array so the same as Lasker AC191
+parameters.encounter= 'AC_78'; %sperm whale A196 uses numbat_gonna array so the same as Lasker AC191
 
 % Specify speed of sound
 parameters.c=1500; 
@@ -79,21 +79,25 @@ switch sigtype
         varargout{1}.freq_filter =[8000,30000]; % for false killer whales
         %         varargout{1}.freq_filter =[5500,20000]; %for sperm whales
 %                 varargout{1}.freq_filter =[10000,80000]; %for Rissos dolphins
+% varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
         parameters.signal_type = 'clicks'; %for plotting
     case 'whistles'
         varargout{1}.signal_type = 'whistles';
         varargout{1}.freq_filter =[2500,12000]; % for false killer whales
+%         varargout{1}.freq_filter =[3300,28000]; % for rough toothed dolphins (Rankin et al 2008)
         parameters.signal_type = 'whistles'; %for plotting
     case 'both'
         varargout{1}.signal_type = 'clicks';
         % Bandpass Filter cut-off frequencies [lower, upper] (in Hz)
         % (determined based on which signal type is chosen):
-        varargout{1}.freq_filter =[8000,30000]; % for false killer whales
+%         varargout{1}.freq_filter =[8000,30000]; % for false killer whales
         %         varargout{1}.freq_filter =[5500,20000]; %for sperm whales
         %         varargout{1}.freq_filter =[20000,80000]; %for Rissos dolphins
+        varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
         varargout{2}.signal_type = 'whistles';
-        varargout{2}.freq_filter =[2500,12000]; % for false killer whales
+        %varargout{2}.freq_filter =[2500,12000]; % for false killer whales
         %         varargout{2}.freq_filter =[2000,20000]; % for Rissos
+        varargout{2}.freq_filter =[3300,28000]; % for rough toothed dolphins (Rankin et al 2008)
         parameters.signal_type = 'both'; %for plotting
 end
 
