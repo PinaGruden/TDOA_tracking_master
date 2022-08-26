@@ -117,6 +117,7 @@ switch parameters.signal_type
         f1= figure;
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), datetick('x','keeplimits');
         colormap(flipud(gray(256)))
+        caxis([0,10])
         colorbar
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
@@ -133,6 +134,7 @@ switch parameters.signal_type
         %plot cross-correlogram
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), datetick('x','keeplimits');
         colormap(flipud(gray(256)))
+        caxis([0,10])
         colorbar
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
@@ -160,28 +162,33 @@ switch parameters.signal_type
         %plot cross-correlogram
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), datetick('x','keeplimits');
         colormap(flipud(gray(256)))
+        caxis([0,10])
         colorbar
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
         title(['Tracked TDOAs based on ', parameters.signal_type])
 
-        %plot measurements
-        hold on
-        for k=1:measure.T
-            if ~isempty(measure.Z{k})
-                plot(t_serialdate(k),measure.Z{k}(1,:),'ro')
-            end
-        end
+%         %plot measurements
+%         hold on
+%         for k=1:measure.T
+%             if ~isempty(measure.Z{k})
+%                 plot(t_serialdate(k),measure.Z{k}(1,:),'ro')
+%             end
+%         end
 
         %plot tracked TDOAs
+        hold on
         for k=1:size(Tracks,2)
             plot(Tracks(k).time_local, Tracks(k).tdoa,'-','LineWidth',3)
         end
         datetick('x','keeplimits');
 
-        h(1) = plot(NaN, NaN,'ro','LineWidth',2);
-        h(2) = plot(NaN, NaN,'b-','LineWidth',2);
-        legend(h,'Measurements','Tracked TDOAs','Location', 'EastOutside');
+%         h(1) = plot(NaN, NaN,'ro','LineWidth',2);
+%         h(2) = plot(NaN, NaN,'b-','LineWidth',2);
+%         legend(h,'Measurements','Tracked TDOAs','Location', 'EastOutside');
+ 
+        h(1) = plot(NaN, NaN,'b-','LineWidth',2);
+        legend(h,'Tracked TDOAs','Location', 'EastOutside');
 
         set(gca,'FontSize',14)
         set(findall(gcf,'type','text'),'FontSize',14)
