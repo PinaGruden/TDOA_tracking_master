@@ -3,6 +3,7 @@
 % produces both clicks and whistles use RUN_TDOA_TRACKING_mixedsignaltypes.m.
 % Also, make sure you specify and change parameters as needed in
 % Specify_Paths.m and Specify_Parameters_CrossCorrelogram.m
+% Make sure you specify 'clicks' or 'whistles' in line 12 below.
 
 clear,close all
 
@@ -37,14 +38,14 @@ switch signal_type
 end
 
 %% 3) EXTRACTION OF MEASUREMENTS:
-
+disp('Extracting measurements from cross-correlogram')
 [measure,Rxy_envelope_scaled,scalar] = extract_measure_crosscorrelogram(...
     Rxy_envelope_ALL,lags,t, parameters.lambda, parameters.excl_lags,...
     parameters.tmax,parameters.min_dist);
 
 
 %% 4) TRACK TDOAS:
-
+disp('Tracking TDOAs')
 % Generate tracking models:
 load('BayesOptimization_GMPHDParams_GTchunked_lambda4_5_DiffBirth.mat')
 load('BirthVelocityPrior_AllTrainData.mat')
@@ -59,8 +60,8 @@ Track = tracktarget_tdoa_labels(Est.Tag,Est.X,model);
 
 
 %% 5) PLOT:
-
-plot_results(t_serialdate,lags,Rxy_envelope_ALL,measure,Tracks, parameters)
+disp('Plotting results')
+plot_results(t_serialdate,lags,Rxy_envelope_scaled,measure,Tracks, parameters)
 
 %% SAVE WORKSPACE with results &  measureemnts
 
