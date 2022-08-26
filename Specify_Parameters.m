@@ -11,13 +11,13 @@ end
 
 % ~~~~~~~~~~~~~~~~~~~~~~~CHANGABLE:~~~~~~~~~~~~~~~~~~~~~~~~
 %Specify survey year
-parameters.year=2021;
+parameters.year=2017;
 
 %Specify array name
-parameters.arrayname= 'Kolea_30m_Pueo';
+parameters.arrayname= 'Numbat_20m_Goanna';
 
 %Specify ENCOUNTER:
-parameters.encounter= 'AC_78'; %sperm whale A196 uses numbat_gonna array so the same as Lasker AC191
+parameters.encounter= 'Lasker_AC191'; 
 
 % Specify speed of sound
 parameters.c=1500; 
@@ -48,8 +48,8 @@ else
     %     prompt="What is the sensor separation?";
     %     parameters.d=input(prompt);
     msg = ['The specified array is not found in Array_Info.csv ' ...
-        '(folder Preprocess_Extract_Measureemnts). Please add the array ' ...
-        'info into that file and try again.'];
+        '(found in the main folder). Please add the array ' ...
+        'info to it and try again.'];
     error(msg)
 end
  
@@ -90,14 +90,14 @@ switch sigtype
         varargout{1}.signal_type = 'clicks';
         % Bandpass Filter cut-off frequencies [lower, upper] (in Hz)
         % (determined based on which signal type is chosen):
-%         varargout{1}.freq_filter =[8000,30000]; % for false killer whales
+        varargout{1}.freq_filter =[8000,30000]; % for false killer whales
         %         varargout{1}.freq_filter =[5500,20000]; %for sperm whales
         %         varargout{1}.freq_filter =[20000,80000]; %for Rissos dolphins
-        varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
+%         varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
         varargout{2}.signal_type = 'whistles';
-        %varargout{2}.freq_filter =[2500,12000]; % for false killer whales
+        varargout{2}.freq_filter =[2500,12000]; % for false killer whales
         %         varargout{2}.freq_filter =[2000,20000]; % for Rissos
-        varargout{2}.freq_filter =[3300,28000]; % for rough toothed dolphins (Rankin et al 2008)
+%         varargout{2}.freq_filter =[3300,28000]; % for rough toothed dolphins (Rankin et al 2008)
         parameters.signal_type = 'both'; %for plotting
 end
 
@@ -137,7 +137,7 @@ parameters.excl_deg = 15; % Cut off for bearings in degrees- e.g.
 % Specify maximum time (in s) to be considered in the noise sample- 
 %   time from the beggining of the encounter up to before any significant 
 %   sources occur (e.g. 1000s).
-parameters.tmax=300;
+parameters.tmax=100;
 
 % Specify minimum distance between two neighbouring cross-correlation peaks
 parameters.min_dist=0.0031; % For FKW whistles- based on the simulation for
