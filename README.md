@@ -12,7 +12,7 @@ Copyright (c) 2021, Pina Gruden
 Before running the package specify the array, paths and parameters for your application by modifying the: 
 - Array_info.csv - if needed add the array information in a new row, specifying sensor separations for your array. Note- the name you give your array should then match the one you specify in the Specify_Parameters.m.
 - Specify_Parameters.m - if needed change any parameters in the sections labeled “ CHANGABLE:” 
-- Specify_Paths.m - specify folders where data is located and where results should be saved to. The expected data format are .wav files, and you can process either the full encounter or individual files. 
+- Specify_Paths.m - specify folders where data is located and where results should be saved to. The expected data format are .wav files, and you can process either the full encounter or individual files. The expected name for .wav files is 'xxx_yyyyMMdd_HHmmss_SSS.wav', where 'xxx_' can be any string (or none), and 'yyyyMMdd_HHmmss_SSS' part of the name specifies the date (year, month, day) and time (hours, minutes, seconds, and milliseconds (SSS)).
 
 
 Then run the package by running either:
