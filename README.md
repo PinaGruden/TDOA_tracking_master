@@ -21,6 +21,19 @@ Then run the package by running either:
 
 ## Output
 
-The package outputs extracted TDOA tracks, as well as measurements and cross-correlograms, and plots the results. Specifically, the outputs are:
-- Normalized cross-correlograms ('Rxy_envelope_scaled_clicks' and/or 'Rxy_envelope_scaled_whistles') - matrix with a dimension of NxM, where N is the number of time steps and M is the number of TDOAs
+The package outputs extracted TDOA tracks, as well as measurements and cross-correlograms, and plots the results.
+
+Specifically, the outputs that are saved in a .mat file are:
+- Normalized cross-correlograms ('Rxy_envelope_scaled_clicks' and/or 'Rxy_envelope_scaled_whistles') - matrix with a dimension of NxM, where N is the number of time steps and M is the number of TDOAs. Additional outputs are also the scalars used for normalization of the cross-correlograms ('scalar_clicks' and/or 'scalar_whistles').
+- Range of possible TDOAs ('lags') - a vector of possible TDOAs for a given sensor separation.
+- Time vector ('t_serialdate') - a time vector in datetime format (for more info type help datetime in Matlab's command prompt)
+- Time vector ('t') - a time vector in seconds from the beginning of the file/encounter.
+- Parameters used in the processing ('parameters')- these are parameters specifying array & encounter information, parameters used in cross-correlogram computation, measurement extraction.
+- Parameters used specifically in processing of clicks and/or whistles ('parameters_clicks','parameters_whistles')
+- Measurements on which the tracking was performed ('measure')- a structure containing measurements ('measure.Z') and number of time steps ('measure.T'). 'measure.Z' is a 1xN cell array, where N is number of time steps, and each cell contains measurements consisting of TDOAs and amplitudes of the cross-correlation information for that time step.
+- Models used in GM-PHD-SA filter ('model')- a structure array containing models and parameters for the filter.
+- Extracted TDOA tracks ('Tracks') - 1xM structure, where M is number of targets. For each target there are three fields: 'time', 'time_local','tdoa', where 'time' refers to time is seconds from the start of the file/encounter, 'time_local' refers to time in timedate format.
+
+
+
   
