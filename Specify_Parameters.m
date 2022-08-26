@@ -11,20 +11,20 @@ end
 
 % ~~~~~~~~~~~~~~~~~~~~~~~CHANGABLE:~~~~~~~~~~~~~~~~~~~~~~~~
 %Specify survey year
-parameters.year=2017;
+parameters.year=2022;
 
 %Specify array name
-parameters.arrayname= 'Numbat_20m_Goanna';
+parameters.arrayname= 'test';
 
 %Specify ENCOUNTER:
-parameters.encounter= 'Lasker_AC191'; 
+parameters.encounter= 'Test'; 
 
 % Specify speed of sound
 parameters.c=1500; 
 
 % Specify which two channels of your recordings you want to cross-correlate
 % Select two that are furthest apart
-parameters.channels = [1,6]; % Note All NOAA 2013 data has only four channels
+parameters.channels = [1,2]; % Note All NOAA 2013 data has only four channels
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
