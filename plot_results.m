@@ -19,7 +19,7 @@ switch parameters.signal_type
         colormap(flipud(gray(256)))
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
-        title(['Cross-correlogram based on ', parameters.signal_type])
+        title(['Extracted Measurements from Cross-correlogram based on ', parameters.signal_type])
         set(gca,'FontSize',14)
         caxis([0,10])
         im.AlphaData = 0.5; % change this value to change the background image transparency
@@ -48,12 +48,12 @@ switch parameters.signal_type
         hold on
         for k=1:measure.T
             if ~isempty(measure.Z{k})
-                plot(t_serialdate(k),measure.Z{k}(1,:),'k.'),hold on
+                plot(t_serialdate(k),measure.Z{k}(1,:),'b.'),hold on
             end
         end
         datetick('x','keeplimits');
 
-        h(1) = plot(NaN, NaN,'k.','LineWidth',4);
+        h(1) = plot(NaN, NaN,'b.','LineWidth',4);
         legend(h,'Measurements','Location', 'southeast');
 
         set(gca,'FontSize',14)
@@ -72,7 +72,7 @@ switch parameters.signal_type
         colormap(flipud(gray(256)))
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
-        title(['Cross-correlogram based on ', parameters.signal_type])
+        title(['Tracked TDOAs from measurements based on ', parameters.signal_type])
         set(gca,'FontSize',14)
         caxis([0,10])
         im.AlphaData = 0.5; % change this value to change the background image transparency
@@ -167,17 +167,17 @@ switch parameters.signal_type
         colorbar
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
-        title(['Cross-correlogram based on ', parameters.signal_type])
+        title(['Extracted Measurements from Cross-correlogram based on ', parameters.signal_type])
 
         %plot measurements
         hold on
         for k=1:measure.T
             if ~isempty(measure.Z{k})
-                plot(t_serialdate(k),measure.Z{k}(1,:),'k.')
+                plot(t_serialdate(k),measure.Z{k}(1,:),'b.')
             end
         end
 
-        h(1) = plot(NaN, NaN,'k.','LineWidth',4);
+        h(1) = plot(NaN, NaN,'b.','LineWidth',4);
         legend(h,'Measurements','Location', 'southeast');
 
         set(gca,'FontSize',14)
@@ -196,7 +196,7 @@ switch parameters.signal_type
         colorbar
         ylim([-parameters.d/parameters.c,parameters.d/parameters.c])
         xlabel('Local Time (HH:MM:SS)'), ylabel('TDOA (s)'),
-        title(['Tracked TDOAs based on ', parameters.signal_type])
+        title(['Tracked TDOAs from measurements based on ', parameters.signal_type])
 
         %plot tracked TDOAs
         hold on
