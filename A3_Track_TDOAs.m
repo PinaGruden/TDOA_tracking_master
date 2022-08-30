@@ -11,9 +11,6 @@
 % 2) Already run A2_Extract_Measurements.m
 %!!!!!!!!!!!!!!!!!
 
-
-% - also decide what will get saved
-
 addpath('./GMPHD_SA'); 
 clear, close all
 
@@ -50,3 +47,6 @@ switch parameters.signal_type
 end
 
 %% SAVE
+
+save([folder2save2.finalresults,parameters.encounter,'_Results.mat'],...
+            'model','Tracks')
