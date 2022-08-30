@@ -175,24 +175,26 @@ start=1;
     if saveworksp==1
     switch signal_type
         case 'whistles'
+            %parameters_whistles=param_signal;
             C=whos('Rxy_envelope_ALL');
             if C.bytes>=2e+9 %if variable size is larger than 2GB then need to save as '-v7.3' (but it performs data compression so it's slow- so only use when necessary)
-                save([folder2save2,encounter,'_1s_05overlap_whistles_Rxy_envelope_ALL.mat'],...
+                save([folder2save2,encounter,'_whistles_rawCrossCorrelogram_ALL.mat'],...
                     'Rxy_envelope_ALL','lags','t_serialdate', 't',...
                     'parameters','param_signal','-v7.3')
             else
-                save([folder2save2,encounter,'_1s_05overlap_whistles_Rxy_envelope_ALL.mat'],...
+                save([folder2save2,encounter,'_whistles_rawCrossCorrelogram_ALL.mat'],...
                     'Rxy_envelope_ALL','lags','t_serialdate', 't',...
                     'parameters','param_signal')
             end
         case 'clicks'
+            %parameters_clicks=param_signal;
             C=whos('Rxy_envelope_ALL');
             if C.bytes>=2e+9 %if variable size is larger than 2GB then need to save as '-v7.3' (but it performs data compression so it's slow- so only use when necessary)
-                save([folder2save2,encounter,'_1s_05overlap_clicks_Rxy_envelope_ALL.mat'],...
+                save([folder2save2,encounter,'_clicks_rawCrossCorrelogram_ALL.mat'],...
                     'Rxy_envelope_ALL','lags','t_serialdate', 't',...
                     'parameters','param_signal','-v7.3')
             else
-                save([folder2save2,encounter,'_1s_05overlap_clicks_Rxy_envelope_ALL.mat'],...
+                save([folder2save2,encounter,'_clicks_rawCrossCorrelogram_ALL.mat'],...
                     'Rxy_envelope_ALL','lags','t_serialdate', 't',...
                     'parameters','param_signal')
             end
@@ -216,9 +218,9 @@ start=1;
 %         caxis([0,0.1])
         switch signal_type
             case 'whistles'
-                print([folder2save2,encounter,'_1s_05overlap_Rxy_envelope_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
+                print([folder2save2,encounter,'_rawCrossCorrelogram_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
             case 'clicks'
-                print([folder2save2,encounter,'_1s_05overlap_clicks_Rxy_envelope_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
+                print([folder2save2,encounter,'_rawCrossCorrelogram_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
             otherwise
                 disp('Not a valid signal type. Choose "whistles" or "clicks"')
         end
