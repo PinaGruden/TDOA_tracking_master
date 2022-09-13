@@ -10,9 +10,9 @@ folder = [s.path,'/'];
 s=what('./Test_example/Data/Raw_CrossCorrelogram/');
 folder2save2.rawcrosscorr= [s.path,'/'];
 
-% Normalized cross-correlogram and measurements:
-s=what('./Test_example/Data/Measurements/');
-folder2save2.measurements= [s.path,'/'];
+% % Normalized cross-correlogram and measurements:
+% s=what('./Test_example/Data/Measurements/');
+% folder2save2.measurements= [s.path,'/'];
 
 % Final tracking results
 s=what('./Test_example/Results/'); % This is where you want your final results to be saved to
