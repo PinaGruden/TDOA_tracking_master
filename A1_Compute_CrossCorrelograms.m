@@ -4,7 +4,7 @@
 %!!!!!!!!!!!!!!!!!
 % Make sure you first
 % 1) Specify and change parameters as needed in
-% Specify_Paths.m and Specify_Parameters_CrossCorrelogram.m
+% Specify_Paths.m and Specify_Parameters4Xcorr.m
 % 2) Specify signal_type variable to be either: 'clicks',
 % 'whistles', or 'both'.
 %!!!!!!!!!!!!!!!!!
@@ -22,11 +22,11 @@ signal_type ='both';
 
 switch signal_type
     case 'clicks'%for clicks:
-        [parameters,parameters_clicks] = Specify_Parameters(signal_type);
+        [parameters,parameters_clicks] = Specify_Parameters4Xcorr(signal_type);
     case 'whistles'% for whistles :
-        [parameters,parameters_whistles] = Specify_Parameters(signal_type);
+        [parameters,parameters_whistles] = Specify_Parameters4Xcorr(signal_type);
     case 'both'
-        [parameters,parameters_clicks,parameters_whistles] = Specify_Parameters(signal_type);
+        [parameters,parameters_clicks,parameters_whistles] = Specify_Parameters4Xcorr(signal_type);
 end
 
 parameters.saveworksp=1; %Save the overall cross-correlogram to folder2save2
