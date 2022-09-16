@@ -101,15 +101,16 @@ switch sigtype
         parameters.signal_type = 'both'; %for plotting
 end
 
-% Specify if you want the cross-correlogram figure plotted & saved (the
-% cross-correlograms will also be plotted at the end in the plot_results.m
-% function)
-parameters.plotcrosscorr= 0; %Plot and save cross-correlogram (0=no,1=yes)
+% Specify if you want the cross-correlogram figure plotted after the 
+% cross-correlogram is computed - this can help troubleshoot (the
+% cross-correlograms will also be plotted at the end after tracking 
+% in A2_ExtractMeasurements_and_TrackTDOAs.m)
+parameters.plotcrosscorr= 1; %Plot cross-correlogram (0=no,1=yes)
 
 %Specify if you want the cross-correlogram saved separately. It will be
 %saved as part of the RUN_TDOA_TRACKING script, so default is to not save
 %separately.
-parameters.saveworksp=0; % Save cross-correlogram & parameters (0=no,1=yes)
+parameters.saveworksp=1; % Save cross-correlogram & parameters (0=no,1=yes)
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
