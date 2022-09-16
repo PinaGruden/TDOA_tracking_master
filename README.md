@@ -31,7 +31,7 @@ Specifically, the outputs that are saved in a .mat file are:
 - Range of possible TDOAs ('lags') - a vector of possible TDOAs for a given sensor separation.
 - Time vector ('t_serialdate') - a time vector in datetime format (for more info type help datetime in Matlab's command prompt)
 - Time vector ('t') - a time vector in seconds from the beginning of the file/encounter.
-- Parameters used in the processing ('parameters')- these are parameters specifying array & encounter information, parameters used in cross-correlogram computation, measurement extraction.
+- Parameters used in the processing ('parameters')- these are parameters specifying array & encounter information, and parameters used in cross-correlogram computation.
 - Parameters used specifically in processing of clicks and/or whistles ('param_signal')
 
 2) From A2_ExtractMeasurements_and_TrackTDOAs.m part of the processing:
