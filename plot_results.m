@@ -1,4 +1,4 @@
-function plot_results(t_serialdate,lags,Rxy_envelope_ALL,measure,Tracks, parameters)
+function plot_results(t_serialdate,lags,Rxy_envelope_ALL,measure,Tracks, parameters,savefolder)
 
 switch parameters.signal_type
     case 'both'
@@ -114,7 +114,7 @@ switch parameters.signal_type
 
 %% 3) PLOT CROSS-CORRELOGRAMS:
 
-        figure(3);
+        f3=figure(3);
 
         subplot(211) %cross-correlogram for clicks
         imagesc(t_serialdate,lags,Rxy_envelope_ALL_clicks); 
@@ -139,11 +139,18 @@ switch parameters.signal_type
         colorbar;
 
 
+
+        if parameters.saveplotsofresults==1 %Save plotted figures
+            print(f1,[savefolder,parameters.encounter,'_ExtractedMeasurements.jpg'],'-djpeg','-r0')
+            print(f2,[savefolder,parameters.encounter,'_TrackedTDOAs.jpg'],'-djpeg','-r0')
+            print(f3,[savefolder,parameters.encounter,'_CombinedCrossCorrelogram.jpg'],'-djpeg','-r0')
+        end
+
     otherwise
 
         %% 1) PLOT CROSS-CORRELOGRAM:
 
-        figure(1);
+        f1=figure(1);
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), 
         datetick('x','keeplimits');
         colormap(flipud(gray(256)))
@@ -158,7 +165,7 @@ switch parameters.signal_type
 
         %% 2) PLOT EXTRACTED MEASUREMENTS
 
-        figure(2);
+        f2=figure(2);
         %plot cross-correlogram
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), 
         datetick('x','keeplimits');
@@ -187,7 +194,7 @@ switch parameters.signal_type
 
         %% 3) PLOT TRACKED TDOAS
 
-        figure(3);
+        f3=figure(3);
         %plot cross-correlogram
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), 
         datetick('x','keeplimits');
@@ -213,5 +220,10 @@ switch parameters.signal_type
 
         hold off
 
+        if parameters.saveplotsofresults==1 %Save plotted figures
+            print(f1,[savefolder,parameters.encounter,'_CrossCorrelogram.jpg'],'-djpeg','-r0')
+            print(f2,[savefolder,parameters.encounter,'_ExtractedMeasurements.jpg'],'-djpeg','-r0')
+            print(f3,[savefolder,parameters.encounter,'_TrackedTDOAs.jpg'],'-djpeg','-r0')
+        end
 end
 end
