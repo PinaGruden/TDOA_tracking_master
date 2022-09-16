@@ -52,6 +52,9 @@ parameters.min_tl=3; %in s
 % track smoothing & interpolation is desired then set movingmeanlength_s=0;
 movingmeanlength_s=5; %in s
 
+%Save result Plots - specify if you want to save plots of your results (1=yes,0 = no)
+parameters.saveplotsofresults=1;
+
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~COMPUTED:~~~~~~~~~~~~~~~~~~~~~~~~~~~~
