@@ -37,14 +37,9 @@ Specifically, the outputs that are saved in a .mat file are:
 2) From A2_ExtractMeasurements_and_TrackTDOAs.m part of the processing:
 - Extracted TDOA tracks ('Tracks') - 1xM structure, where M is number of targets. For each target there are three fields: 'time', 'time_local','tdoa', where 'time' refers to time is seconds from the start of the file/encounter, 'time_local' refers to time in timedate format.
 - Models used in GM-PHD-SA filter ('model')- a structure array containing models and parameters for the filter.
-- Parameters used for normalization, measurement extraction and track extraction ('parameters_measure_tracking')
-- Parameters used in the processing ('parameters')- these are parameters specifying array & encounter information, parameters used in cross-correlogram computation, measurement extraction. (Comes from A1 part of the processing)
-- Parameters used specifically in processing of clicks and/or whistles ('parameters_clicks' and 'parameters_whistles' or 'param_signal') (Comes from A1 part of the processing)
-- Scalars used for normalization of the cross-correlograms ('scalar_clicks'  and 'scalar_whistles' or 'scalar').
+- Parameters used for normalization, measurement extraction and track extraction ('parameters_measure_tracking').
+- Parameters used in the cross-correlogram computation ('parameters'), (Comes from A1 part of the processing).
+- Parameters used specifically in processing of clicks and/or whistles ('parameters_clicks' and 'parameters_whistles' or 'param_signal'), (Comes from A1 part of the processing).
+- Scalars used for normalization of the cross-correlograms ('scalar_clicks' and 'scalar_whistles' or 'scalar').
 
 
-
-
-
-
- 
