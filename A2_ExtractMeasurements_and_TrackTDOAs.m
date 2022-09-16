@@ -115,14 +115,15 @@ Track = tracktarget_tdoa_labels(Est.Tag,Est.X,model);
 
 %% PLOT RESULTS:
 disp('Plotting results...')
+parameters.saveplotsofresults=parameters_measure_tracking.saveplotsofresults;
 
 switch parameters.signal_type
     case 'clicks' 
-        plot_results(t_serialdate,lags,Rxy_envelope_scaled,measure,Tracks, parameters);
+        plot_results(t_serialdate,lags,Rxy_envelope_scaled,measure,Tracks, parameters,folder2save2.finalresults);
     case 'whistles'
-        plot_results(t_serialdate,lags,Rxy_envelope_scaled,measure,Tracks, parameters);
+        plot_results(t_serialdate,lags,Rxy_envelope_scaled,measure,Tracks, parameters,folder2save2.finalresults);
     case 'both'
-        plot_results(t_serialdate,lags,{Rxy_envelope_scaled_clicks,Rxy_envelope_scaled_whistles},measure,Tracks, parameters);
+        plot_results(t_serialdate,lags,{Rxy_envelope_scaled_clicks,Rxy_envelope_scaled_whistles},measure,Tracks, parameters,folder2save2.finalresults);
 end
 
 %% SAVE:
