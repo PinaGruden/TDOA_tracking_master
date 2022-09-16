@@ -204,7 +204,8 @@ start=1;
     end
 
     if plotfig==1
-        f= figure('visible', 'off');
+        %f= figure('visible', 'off');
+        figure;
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), datetick('x','keeplimits');
         colormap(flipud(gray(256)))
         colorbar
@@ -212,19 +213,21 @@ start=1;
         xlabel('Local Time (HH:MM)'), ylabel('TDOA (s)'),
         title(['Cross-correlogram based on ',signal_type])
         set(gca,'FontSize',12)
-        set(findall(gcf,'type','text'),'FontSize',12)
-        f.PaperUnits='centimeters';
-        f.PaperPosition=[0,0,100,30];%size specified as panorama, 5:1- [left,bottom,width, height]
-%         caxis([0,0.1])
-        switch signal_type
-            case 'whistles'
-                print([folder2save2,encounter,'_rawCrossCorrelogram_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
-            case 'clicks'
-                print([folder2save2,encounter,'_rawCrossCorrelogram_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
-            otherwise
-                disp('Not a valid signal type. Choose "whistles" or "clicks"')
-        end
-        close(f)
+        set(findall(gcf,'type','text'),'FontSize',14)
+        
+% %         caxis([0,0.1])
+%%% Uncomment below if you want to save the cross-correlogram figure:
+% f.PaperUnits='centimeters';
+%         f.PaperPosition=[0,0,100,30];%size specified as panorama, 5:1- [left,bottom,width, height]
+%         switch signal_type
+%             case 'whistles'
+%                 print([folder2save2,encounter,'_rawCrossCorrelogram_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
+%             case 'clicks'
+%                 print([folder2save2,encounter,'_rawCrossCorrelogram_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
+%             otherwise
+%                 disp('Not a valid signal type. Choose "whistles" or "clicks"')
+%         end
+%         close(f)
     end
 
 end
