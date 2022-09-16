@@ -17,8 +17,8 @@ Before running the package specify the array, paths and parameters for your appl
 
 
 Then run the package by running:
-- 1) A1_Compute_CrossCorrelograms.m - This computes and saves the cross-correlogram based on your audio data. IMPORTANT: specify what signal type you want to be processing for (line 16)- choose either "clicks", "whistles", or "both", depending on your application.
-- 2) A2_ExtractMeasurements_and_TrackTDOAs.m - This extracts measurements and tracks TDOAs based on that and returns the extracted TDOA tracks. Results are also displayed as plots.
+1) A1_Compute_CrossCorrelograms.m - This computes and saves the cross-correlogram based on your audio data. IMPORTANT: specify what signal type you want to be processing for (line 16)- choose either "clicks", "whistles", or "both", depending on your application.
+2) A2_ExtractMeasurements_and_TrackTDOAs.m - This extracts measurements and tracks TDOAs based on that and returns the extracted TDOA tracks. Results are also displayed as plots.
 
 
 ## Output
