@@ -1,6 +1,10 @@
 # Project specific files and folders #
 ######################
 /Test_example/
+Specify_Parameters4Tracking.m
+Specify_Parameters4Xcorr.m
+Specify_Paths.m
+Array_Info.csv
 
 # OS generated files #
 ######################
