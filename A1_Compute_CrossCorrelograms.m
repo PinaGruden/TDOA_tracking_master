@@ -13,7 +13,7 @@ addpath('./Preprocess_Extract_Measurements');
 clear, close all
 
 
-signal_type ='both';
+signal_type ='clicks';
 
 
 %% 1) USER SPECIFIED PATHS and PARAMETERS:
