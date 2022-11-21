@@ -5,9 +5,12 @@ function [RT,lags,RT_envelope,t] = gcc(x,y,fs,win_width,perc_overlap,Wf, freq_fi
 %envelope of the cross-corerlation computed through the Hilbert transform.
 %
 % INPUTS:
-% - x = data- each column is a channel, at the moment just two channels are
-% considered, so x should be a M x N matrix where M is the samples and N is
-% the channel
+% - x = data -  M x N matrix where M are the samples and N are the channels
+% of audio file. In this implementation N == 2 (i.e. two channels).
+% - y = data for the next file after x (it is used to pad the last window
+% in the x data when batch processing). It is a M x N matrix, where M are
+% the samples and N are the channels of audio file. In this implementation
+% N == 2. If no other audio file comes after x then leave y empty-> y=[];
 % - fs = sampling frequency
 % - win_width = length of the window in samples. This MUST be even number.
 % - perc_overlap = percentage of overlap between windows (e.g. for 75%
