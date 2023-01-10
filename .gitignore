@@ -6,6 +6,10 @@ Specify_Parameters4Xcorr.m
 Specify_Paths.m
 Array_Info.csv
 
+# Matlab generated files #
+######################
+*.asv
+
 # OS generated files #
 ######################
 .DS_Store
