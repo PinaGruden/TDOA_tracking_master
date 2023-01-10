@@ -1,7 +1,7 @@
 function [Rxy_envelope_ALL, lags, t_serialdate,t]=compute_crosscorrelogram(folder1,folder2save2, parameters,param_signal)
 % compute_crosscorrelogram.m is a function that computes a
 % cross-correlogram between two channels in audio data.
-
+%
 %INPUTS:
 % - folder1 - a string specifying path to the folder where audio data is
 %           located
@@ -36,7 +36,7 @@ function [Rxy_envelope_ALL, lags, t_serialdate,t]=compute_crosscorrelogram(folde
 %       ~ signal_type -  a string specifying the signal type ('whistles'/'clicks') 
 %       ~ freq_filter - 1 x 2 vector specifying min and max frequency limits
 %        for the signal_type (in Hz).
-
+%
 %OUTPUTS:
 % - Rxy_envelope_ALL- cross-correlogram- a M x N matrix containing 
 %   cross-correlation information, where M is number of TDOAs and N is
