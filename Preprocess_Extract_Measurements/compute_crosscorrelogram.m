@@ -38,10 +38,12 @@ function [Rxy_envelope_ALL, lags, t_serialdate,t]=compute_crosscorrelogram(folde
 %        for the signal_type (in Hz).
 
 %OUTPUTS:
-% - Rxy_envelope_ALL,
-% - lags,
-% - t_serialdate,
-% - t
+% - Rxy_envelope_ALL- cross-correlogram- a M x N matrix containing 
+%   cross-correlation information, where M is number of TDOAs and N is
+%   number of time steps.
+% - lags - 1 x M vector of TDOAs,
+% - t_serialdate - 1 x N vector of times (in a serial date format),
+% - t - 1 x N vector of times (starting at 0 at the beginning of encounter).
 
 %Pina Gruden, 2022, UH Manoa
 
@@ -190,12 +192,6 @@ start=1;
         else
             start = stop+1;
         end
-
-
-        %         %SAVE
-        %         save([folder2save2,'/GCC_',signal_type,'_',num2str(window_length_s),'s_',file(1:end-4),'.mat'],...
-        %             'file','method','freq_filter','fs','lags','RT_envelope','win_step',...
-        %             'win_length','overlap','c','d','t','encounter','signal_type','channels')
 
     end
 
