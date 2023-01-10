@@ -103,41 +103,20 @@ flagf=find(index)+1;
 %Number of missing time steps for each file:
 Nstepsmissing=seconds(actual_gaps(index)-expected_gaps(index))./dt;
 
-% gaps = [NaN; diff(timestamps)];
-% 
-% index=gaps>seconds(60.1);
-% % if sum(index)>0
-% %     fprintf('Warning:\n There are gaps in the recordings: before file %i.\n', find(index))  
-% % end
-% flagf=find(index); %this gives index of the file before which there is a gap in the recordings
-% 
-% % %Number of missing time steps for each file:
-% % % dt=(1-overlap)*window_length_s;%time increment between frames in seconds
-% Nstepsmissing=(seconds(gaps(index))-60)/dt;
-
-
 %-----------------------------------------------------------------
 % COMPUTE GCC
 %-----------------------------------------------------------------
 %pre-allocate
-% between(timestamps(1),timestamps(end))
-% M=(seconds(nansum(gaps))+60)/dt; %this assumes the last file is 60 s long.
-% 
-% [~,fs]=audioread([file1(1).folder,'/',file1(1).name]);
-
 M=round((seconds(timestamps(end)-timestamps(1))+duration_file(end))./dt);
-
 fs=info.SampleRate; %this assumes all files have the same sampling rate
 L= round((d/c*1.1)*2*fs); %cross-correlogram lags are limited by the sensor 
 % separation- the lags will be between -d/c and d/c and we add 10% on top 
 % in case distance is not accurately measured
-
 Rxy_envelope_ALL= zeros(L,M);
 
 start=1;
     for k = 1:N %iterate through files in the folder
-        
-       
+      
         %% Read the WAV file
         file=file1(k).name;
         disp(['Computing ', signal_type,' cross-correlogram for file ',file])
@@ -162,7 +141,7 @@ start=1;
         switch signal_type
             case 'whistles'
                 %~~~~ Remove clicks and filter ~~~~~~~
-                y = preprocess(x_filt,1024,0.5,5,6); %tested and it does not affect phase
+                y = preprocess(x_filt,1024,0.5,5,6); %tested and it does not affect the phase
                 y1 = preprocess(x1_filt,1024,0.5,5,6);
             case 'clicks'
                 y=x_filt;
@@ -175,7 +154,7 @@ start=1;
         %% SPECIFY PARAMS for GCC and do GCC
         
         win_length=window_length_s*fs; %WINDOW LENGTH FOR GCC in samples
-        win_step=1-overlap; %percentage
+        win_step=1-overlap; %proportion
         HT=1; %compute envelope via Hilbert transform
         
         [~,lags,RT_envelope,~] = gcc(y,y1,fs,win_length,overlap,method,freq_filter,HT);
@@ -198,12 +177,8 @@ start=1;
     %trim away unused pre-allocated space
     Rxy_envelope_ALL=Rxy_envelope_ALL(1:m,:);
 
-    % dt=((1-overlap)*win_length)/fs;%time increment between frames in seconds
     t=(0:(size(Rxy_envelope_ALL,2)-1)).*dt; %start times of frames, in seconds (for easier plotting)
 
-    %determine duration of the last file:
-%     info = audioinfo([file1(end).folder,'/',file1(end).name]);
-%     dur_last=info.Duration;
     dur_last=duration_file(end);
 
 %     t_datetime=timestamps(1):seconds(dt):timestamps(end)+seconds(dur_last)-seconds(dt);
@@ -215,7 +190,6 @@ start=1;
     if saveworksp==1
     switch signal_type
         case 'whistles'
-            %parameters_whistles=param_signal;
             C=whos('Rxy_envelope_ALL');
             if C.bytes>=2e+9 %if variable size is larger than 2GB then need to save as '-v7.3' (but it performs data compression so it's slow- so only use when necessary)
                 save([folder2save2,encounter,'_whistles_rawCrossCorrelogram_ALL.mat'],...
@@ -227,7 +201,6 @@ start=1;
                     'parameters','param_signal')
             end
         case 'clicks'
-            %parameters_clicks=param_signal;
             C=whos('Rxy_envelope_ALL');
             if C.bytes>=2e+9 %if variable size is larger than 2GB then need to save as '-v7.3' (but it performs data compression so it's slow- so only use when necessary)
                 save([folder2save2,encounter,'_clicks_rawCrossCorrelogram_ALL.mat'],...
@@ -244,7 +217,6 @@ start=1;
     end
 
     if plotfig==1
-        %f= figure('visible', 'off');
         figure;
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), datetick('x','keeplimits');
         colormap(flipud(gray(256)))
@@ -254,20 +226,7 @@ start=1;
         title(['Cross-correlogram based on ',signal_type])
         set(gca,'FontSize',12)
         set(findall(gcf,'type','text'),'FontSize',14)
-        
-% %         caxis([0,0.1])
-%%% Uncomment below if you want to save the cross-correlogram figure:
-% f.PaperUnits='centimeters';
-%         f.PaperPosition=[0,0,100,30];%size specified as panorama, 5:1- [left,bottom,width, height]
-%         switch signal_type
-%             case 'whistles'
-%                 print([folder2save2,encounter,'_rawCrossCorrelogram_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
-%             case 'clicks'
-%                 print([folder2save2,encounter,'_rawCrossCorrelogram_ALL_LocalTimeXaxis.jpg'],'-djpeg','-r0')
-%             otherwise
-%                 disp('Not a valid signal type. Choose "whistles" or "clicks"')
-%         end
-%         close(f)
+
     end
 
 end
