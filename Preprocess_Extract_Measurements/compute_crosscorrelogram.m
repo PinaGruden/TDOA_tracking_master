@@ -1,5 +1,49 @@
 function [Rxy_envelope_ALL, lags, t_serialdate,t]=compute_crosscorrelogram(folder1,folder2save2, parameters,param_signal)
+% compute_crosscorrelogram.m is a function that computes a
+% cross-correlogram between two channels in audio data.
 
+%INPUTS:
+% - folder1 - a string specifying path to the folder where audio data is
+%           located
+% - folder2save2 - a structure specifying paths to where data is stored to.
+%                   Has two fields:
+%                   ~'rawcrosscorr' (path to where cross-correlogram 
+%                   will be stored);
+%                   ~'finalresults' (path to where final results will
+%                    be stored)
+% - parameters -  a structure with at least 13 fields containing parameters  
+%               for the encounter and processing. The following 10 fields
+%               are required:
+%       ~ parameters.encounter- a string specifying the encounter name (should
+%         match the name in Array_info.csv)
+%       ~ parameters.c - a scalar specifying the speed of sound
+%       ~ parameters.channels - 1 x 2 vector specifying sensor channels to
+%           be used for processing
+%       ~ parameters.d - a scalar specifying sensor separation
+%       ~ parameters.method - a string specifying method for generalized
+%           cross-correlation (GCC) computation. Should be 'scc'/'phat'/'scot' 
+%           (see gcc.m for more info)
+%       ~ parameters.window_length_s - window length (in s) over which the 
+%           cross-correlation is computed
+%       ~ parameters.overlap - proportion of overlap between consecutive
+%           windows for cross-correlogram computation (between 0 and 1)
+%       ~ parameters.plotcrosscorr- a scalar to specify to plot the 
+%           cross-correlogram or not (0=no,1=yes)
+%       ~ parameters.saveworksp - a scalar to specify to save the 
+%           cross-correlogram or not (0=no,1=yes)
+%       ~ parameters.dt - time increment between consecutive GCC windows (in s)
+% - param_signal - a structure with two fields:
+%       ~ signal_type -  a string specifying the signal type ('whistles'/'clicks') 
+%       ~ freq_filter - 1 x 2 vector specifying min and max frequency limits
+%        for the signal_type (in Hz).
+
+%OUTPUTS:
+% - Rxy_envelope_ALL,
+% - lags,
+% - t_serialdate,
+% - t
+
+%Pina Gruden, 2022, UH Manoa
 
 signal_type =param_signal.signal_type;
 freq_filter = param_signal.freq_filter;
