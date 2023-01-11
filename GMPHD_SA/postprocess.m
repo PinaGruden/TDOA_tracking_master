@@ -1,4 +1,33 @@
 function [tracks] = postprocess(Track,t_serialdate,parameters)
+% function postprocess.m removes short tracks (below min length criteria)
+% form a list of tracks, smoothes the tracks trajectories (with moving
+% average) and adds time info (in a serial date format) to each track.
+%
+% INPUTS:
+% - Track - a structure contatining each target (TDOA track) in a separate
+%       row. It has 5 fields:
+%       ~ tdoa - tdoas of a given target track
+%       ~ dottdoa - derivatives of the tdoas (i.e. velocity) of a given target track
+%       ~ time - times (from the begining of the encounter) of a given target track
+%       ~ label - labels (identities) of a given target track
+%       ~ ti - index to a time step (from the beginning of the encounter) of a given target track
+% - t_serialdate - a 1 x M vector of times (in serial date format) for the
+%       encounter
+% - parameters - a structure containing info on encounter, array, and
+%       parameters used for measurement extraction. Needs at least 3 fields:
+%       ~ dt - time step (in s)
+%       ~ min_tl - minimum track length criteria (in s)
+%       ~ movemean_length- length of the moving average (in time steps)
+%
+% OUTPUTS:
+% - tracks - a structure contatining each target (TDOA track) in a separate
+%       row. It has 3 fields:
+%       ~ time - times (from the begining of the encounter) of a given target track
+%       ~ time_local - times (in a serial date format) of a given target track
+%       ~ tdoa - tdoas of a given target track
+%
+%
+% Pina Gruden
 
 dt=parameters.dt; %time step 
 min_tl= parameters.min_tl; %minimum track length criteria (in s)

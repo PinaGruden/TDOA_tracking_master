@@ -1,7 +1,7 @@
 function [folder, folder2save2] = Specify_Paths
 %Use Specify_Paths.m to CONFIGURE PATHS to recordings & folders to save 
 % data/results to. 
-
+%
 %OUTPUT:
 % - folder - a string specifying path to the folder where audio data is
 %           located
