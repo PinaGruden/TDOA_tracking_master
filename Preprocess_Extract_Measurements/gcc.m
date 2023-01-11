@@ -49,7 +49,8 @@ function [RT,lags,RT_envelope,t] = gcc(x,y,fs,win_width,perc_overlap,Wf, freq_fi
 % this means that if I get a NEGATIVE \tau the Y signal IS DELAYED
 % with respect to X.
 %!!!!!!!!!
-
+%
+%
 %Pina Gruden, July 2019
 
 

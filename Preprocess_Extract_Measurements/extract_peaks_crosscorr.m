@@ -4,19 +4,23 @@ function [Lags,LagsAmp] = extract_peaks_crosscorr(Rxy,lags,lambda,varargin)
 % avoid for example the vessel detection if towed array is used), and
 % specify minimum distance between neighbouring peaks.
 %
-% Inputs:
-%- Rxy = Cross-correlogram- cross-correlation / envelope of cross-correlation
-%- lags = TDOAs
-%- lambda = threshold value for peak selection 
-%varargin:
-%- varargin{1} = excl_lags = a value for TDOAs below which the search is not performed -
-%this is to avoid detecting a boat in front of the array (negative TDOAs)
-%- varargin{2} = min_dist = minimum distance between two neighbouring peaks
+% INPUTS:
+% - Rxy = Cross-correlogram- N x M matrix containing cross-correlation 
+%   values, N number of TDOAs (lags), M number of time steps
+% - lags = a 1 x N vector of TDOAs
+% - lambda = a scalar specifying minimum amplitude threshold for peak selection 
+% - varargin:
+%   ~ varargin{1} = excl_lags = a value for TDOAs below which the search is
+%       not performed (to avoid detecting a boat in front of the array)
+%   ~ varargin{2} = min_dist = minimum distance between two neighbouring 
+%       peaks of the cross-correlation function
 %
-% Outputs:
-%- Lags = extracted TDOAs
-%- LagsAmp = extracted amplitudes of the cross-correlation
-
+% OUTPUTS:
+% - Lags = extracted TDOAs- 1 x M cell array, where M is number of time steps 
+% - LagsAmp = extracted amplitudes of the cross-correlation- 1 x M cell
+%   array, where M is number of time steps
+%
+%
 %Pina Gruden, UH Manoa, April 2022
 
 
@@ -38,9 +42,6 @@ end
 
 %% Extract peaks
 range=lags>excl_lags; %exclude the peaks due to boat
-% min_dist= 0.0031; %min separation of the peaks- based on the simulation for
-%signals of 600 Hz bandwidth- if two sources are closer than that they will
-%not be separated
 
 %EXTRACT PEAKS ABOVE THRESHOLD lambda:
 Lags =cell(1,size(Rxy,2));

@@ -44,7 +44,8 @@ function [Rxy_envelope_ALL, lags, t_serialdate,t]=compute_crosscorrelogram(folde
 % - lags - 1 x M vector of TDOAs,
 % - t_serialdate - 1 x N vector of times (in a serial date format),
 % - t - 1 x N vector of times (starting at 0 at the beginning of encounter).
-
+%
+%
 %Pina Gruden, 2022, UH Manoa
 
 signal_type =param_signal.signal_type;
