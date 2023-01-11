@@ -2,11 +2,11 @@ function [parameters,varargout]= Specify_Parameters4Xcorr(sigtype)
 % Use Specify_Parameters4Xcorr.m to SPECIFY PARAMETERS for ARRAY, ENCOUNTER 
 % & CROSS-CORRELOGRAM. Change all parameters in sections labeled
 % "CHANGABLE".
-
+%
 % INPUTS:
 % - sigtype - a string specifying a signal type that is of interest. Needs
 %             to be 'whistles' or 'clicks' or 'both'.
-
+%
 % OUTPUTS:
 % - parameters - a structure containing parameters for the encounter and 
 %               processing. It has 13 fields:
@@ -15,10 +15,10 @@ function [parameters,varargout]= Specify_Parameters4Xcorr(sigtype)
 %         match the name in Array_info.csv)
 %       ~ parameters.encounter- a string specifying the encounter name (should
 %         match the name in Array_info.csv)
-%       ~ parameters.c - a scalar specifying the speed of sound
+%       ~ parameters.c - a scalar specifying the speed of sound (m/s)
 %       ~ parameters.channels - 1 x 2 vector specifying sensor channels to
 %           be used for processing
-%       ~ parameters.d - a scalar specifying sensor separation
+%       ~ parameters.d - a scalar specifying sensor separation (m)
 %       ~ parameters.method - a string specifying method for generalized
 %           cross-correlation (GCC) computation. Should be 'scc'/'phat'/'scot' 
 %           (see gcc.m for more info)
@@ -32,13 +32,14 @@ function [parameters,varargout]= Specify_Parameters4Xcorr(sigtype)
 %           cross-correlogram or not (0=no,1=yes)
 %       ~ parameters.saveworksp - a scalar to specify to save the 
 %           cross-correlogram or not (0=no,1=yes)
-%       ~ parameters.dt - time increment between consecutive GCC windows (in s)
+%       ~ parameters.dt - a scalar specifying time increment between  
+%           consecutive time steps (in s)
 % - vargout - a structure with two fields:
 %       ~ signal_type -  a string specifying the signal type ('whistles'/'clicks') 
 %       ~ freq_filter - 1 x 2 vector specifying min and max frequency limits
 %        for the signal_type (in Hz).
-
-
+%
+%
 % Pina Gruden, 2022, UH Manoa
 
 

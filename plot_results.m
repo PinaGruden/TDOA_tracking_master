@@ -1,4 +1,37 @@
 function plot_results(t_serialdate,lags,Rxy_envelope_ALL,measure,Tracks, parameters,savefolder)
+% plot_results.m is a function that plots TDOA tracking package results
+%
+% INPUTS:
+% - t_serialdate - a 1 x M vector of times (in serial date format). 
+% - lags - a 1 x N vector of all possible TDOAs (for a given sensor spacing).
+% - Rxy_envelope_ALL- cross-correlogram- a M x N matrix containing 
+%   cross-correlation information, where M is number of TDOAs and N is
+%   number of time steps.
+% - measure = a struct with two fields:
+%   ~ measure.Z: a RFS of measurements- 1 x M cell array, where M is number  
+%           of time steps. Each cell contains TDOA and amplitude of the 
+%           cross-correlation information. 
+%   ~ measure.T: a scalar specifying the number of time steps M 
+% - Tracks: a structure containing all TDOA tracks. Structure has 3 fields:
+%           ~ time - a vector of times (starting at 0) for a given track;
+%           ~ time_local- a vector of times (serial date format) for a
+%                           given track;                          
+%           ~ tdoa - a vector of tdoas for a given track.
+% - parameters - a structure with at least 3 fields:
+%       ~ signal_type - a string specifying a signal type that is of 
+%             interest ('whistles'/'clicks'/'both')
+%       ~ d - a number specifying sensor separation (m)
+%       ~ c - a number specifying the speed of sound (m/s)
+%       ~ saveplotsofresults - a number specifying whether to save plots of
+%           results (1=yes,0 = no)
+%       ~ encounter - a sting specifying the name of the encounter that was
+%           processed
+% - savefolder - a string specifying full path to the folder where plots
+%           will be saved to.
+%
+%
+% Pina Gruden 2022, UH Manoa
+
 
 switch parameters.signal_type
     case 'both'
