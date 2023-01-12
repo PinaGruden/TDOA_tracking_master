@@ -1,4 +1,23 @@
 function [qz_temp,m_temp,P_temp] = kalman_update_single(z,H,R,m,P)
+% kalman_update_single.m is a function that uses Kalman filter to
+% update a single target state according to measurement model.
+%
+% INPUTS:
+% - z - measurements for a given time step -  1 x N vector (N = number of
+%   targets)
+% - H - measurement matrix  
+% - R - measurement noise covariance matrix
+% - m - target state - d x 1 vector (d = dimension of the state)  
+% - P - covariance matrix of the targets - d x d matrix
+%   (d = dimension of the state)
+%
+% OUTPUTS:
+% - qz_temp - target likelihood 1 x Z matrix (Z = number of measurements) 
+% - m_temp - state of the updated target - d x Z matrix (d = dimension of 
+%   the state,Z = number of measurements)
+% - P_temp - covariance matrix of the updated target - d x d matrix
+%   (d = dimension of the state)
+%
 
 mu = H*m;
 S  = H*P*H'+R; 

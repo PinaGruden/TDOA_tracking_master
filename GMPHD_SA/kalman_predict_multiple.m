@@ -1,4 +1,24 @@
 function [m_predict,P_predict] = kalman_predict_multiple(model,m,P)      
+% kalman_predict_multiple.m is a function that uses Kalman filter to
+% predict target states according to system model.
+%
+% INPUTS:
+% - model - a struct containing information on system model. 
+%   Two fileds required: ~ F - system matrix  
+%                        ~ Q - system noise covariance matrix
+% - m - states of the targets- d x N matrix 
+%   (d = dimension of the state, N = number of targets)
+% - P - covariance matrices of the targets - d x d x N array 
+%   (d = dimension of the state, N = number of targets)
+%
+% OUTPUTS:
+% - m_predict - states of the predicted targets - d x N matrix 
+%   (d = dimension of the state, N = number of targets)
+% - P_predict - covariance matrices of the predicted targets - d x d x N 
+%   array (d = dimension of the state, N = number of targets)
+%   
+%
+%
 
 plength= size(m,2);
 
