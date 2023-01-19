@@ -1,4 +1,25 @@
 function [wn,mn,Pn,Tagn] = gmphd_merge(w,m,P,U,Tag)
+% function gmphd_merge.m merges Gaussian components that are close together
+% based on the threshold U.
+%
+% INPUTS:
+% - w - weights of the targets- 1 x N vector (N = number of targets)
+% - m - states of the targets- d x N matrix (d = dimension of the state, N = number of targets)
+% - P - covariance matirces of the targets - d x d x N array (d = dimension of the state,  
+%   N = number of targets)
+% - U - a number specifying the merging threshold
+% - Tag - identity of the components - 1 x N vector (N = number of
+%   targets)
+%
+% OUTPUTS:
+% - wn - weights of the merged targets
+% - mn - states of the merged targets
+% - Pn - covariance matirces of the merged targets
+% - Tagn - identities of the merged components
+%
+%
+% Pina Gruden
+
 
 xdim=size(m,1);
 In=1:length(w);

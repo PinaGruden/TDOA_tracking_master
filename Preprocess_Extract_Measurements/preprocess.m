@@ -8,8 +8,8 @@ function [y] = preprocess(x,win_width,perc_overlap, tresh,p)
 % - x = time domain signal (each channel is in a separate column)
 % - win_width = window length in samples (processing is carried out within
 %               each window)
-% - pec_overlap = percentage overlap between consecutive window (e.g. 0.5
-%               is 50% overlap)
+% - perc_overlap = proportion of overlap between consecutive windows (e.g. 
+%               0.5 is 50% overlap) (between 0 and 1)
 % - tresh = threshold used in weighting function 
 %           (see Gillespie et al (2013), Section II.A.1 for details)
 % - p = power factor used in weighting function
@@ -17,10 +17,11 @@ function [y] = preprocess(x,win_width,perc_overlap, tresh,p)
 %
 % OUTPUTS:
 % y = de-clicked time domain signal
-
+%
+%
 % Written by Pina Gruden, RCUH, Hawaii, 2021.
-
-
+%
+%
 % References:
 % -  D. Gillespie, M. Caillat, J. Gordon, and P. R. White (2013). Automatic 
 % detection and classication of odontocete whistles, J. Acoust. Soc. Am. 

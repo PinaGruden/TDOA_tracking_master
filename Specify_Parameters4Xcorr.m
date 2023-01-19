@@ -1,5 +1,46 @@
 function [parameters,varargout]= Specify_Parameters4Xcorr(sigtype)
-% SPECIFY PARAMETERS for ARRAY, ENCOUNTER &  CROSS-CORRELOGRAM:
+% Use Specify_Parameters4Xcorr.m to SPECIFY PARAMETERS for ARRAY, ENCOUNTER 
+% & CROSS-CORRELOGRAM. Change all parameters in sections labeled
+% "CHANGABLE".
+%
+% INPUTS:
+% - sigtype - a string specifying a signal type that is of interest. Needs
+%             to be 'whistles' or 'clicks' or 'both'.
+%
+% OUTPUTS:
+% - parameters - a structure containing parameters for the encounter and 
+%               processing. It has 13 fields:
+%       ~ parameters.year - a scalar specifying the year of the survey
+%       ~ parameters.arrayname - a string specifying the array name (should
+%         match the name in Array_info.csv)
+%       ~ parameters.encounter- a string specifying the encounter name (should
+%         match the name in Array_info.csv)
+%       ~ parameters.c - a scalar specifying the speed of sound (m/s)
+%       ~ parameters.channels - 1 x 2 vector specifying sensor channels to
+%           be used for processing
+%       ~ parameters.d - a scalar specifying sensor separation (m)
+%       ~ parameters.method - a string specifying method for generalized
+%           cross-correlation (GCC) computation. Should be 'scc'/'phat'/'scot' 
+%           (see gcc.m for more info)
+%       ~ parameters.window_length_s - window length (in s) over which the 
+%           cross-correlation is computed
+%       ~ parameters.overlap - proportion of overlap between consecutive
+%           windows for cross-correlogram computation (between 0 and 1)
+%       ~ parameters.signal_type - a string specifying a signal type that 
+%           is of interest ('whistles'/'clicks'/'both')
+%       ~ parameters.plotcrosscorr- a scalar to specify to plot the 
+%           cross-correlogram or not (0=no,1=yes)
+%       ~ parameters.saveworksp - a scalar to specify to save the 
+%           cross-correlogram or not (0=no,1=yes)
+%       ~ parameters.dt - a scalar specifying time increment between  
+%           consecutive time steps (in s)
+% - vargout - a structure with two fields:
+%       ~ signal_type -  a string specifying the signal type ('whistles'/'clicks') 
+%       ~ freq_filter - 1 x 2 vector specifying min and max frequency limits
+%        for the signal_type (in Hz).
+%
+%
+% Pina Gruden, 2022, UH Manoa
 
 
 if sum([strcmp(sigtype,'clicks'),strcmp(sigtype,'whistles'),strcmp(sigtype,'both')])==0
@@ -24,7 +65,7 @@ parameters.c=1500;
 
 % Specify which two channels of your recordings you want to cross-correlate
 % Select two that are furthest apart
-parameters.channels = [1,2]; % Note All NOAA 2013 data has only four channels
+parameters.channels = [1,2]; 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -45,8 +86,6 @@ if ~isempty(RowIn)
         error(msg)
     end
 else
-    %     prompt="What is the sensor separation?";
-    %     parameters.d=input(prompt);
     msg = ['The specified array is not found in Array_Info.csv ' ...
         '(found in the main folder). Please add the array ' ...
         'info to it and try again.'];
@@ -107,9 +146,7 @@ end
 % in A2_ExtractMeasurements_and_TrackTDOAs.m)
 parameters.plotcrosscorr= 1; %Plot cross-correlogram (0=no,1=yes)
 
-%Specify if you want the cross-correlogram saved separately. It will be
-%saved as part of the RUN_TDOA_TRACKING script, so default is to not save
-%separately.
+%Specify if you want the cross-correlogram saved.
 parameters.saveworksp=1; % Save cross-correlogram & parameters (0=no,1=yes)
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

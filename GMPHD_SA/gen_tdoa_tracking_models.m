@@ -9,13 +9,14 @@ function [model] = gen_tdoa_tracking_models(parameters, BayesoptResults,birthvel
 % - BayesoptResults - object containing results of Bayesian optimization for
 % certain parameters (consider this as a trained prior information).
 % - birthvelocity - prior on the velocity component of newborn targets
-% (learned from data).
+% (learned from data)- 2 x N matrix, where first row are N bearings and
+% second row are learned velocities.
 %
-% OUTPUTS
-% - model - a struct containing information required for TDOA tracking with
-% GMPHD-SA filter.
-
-
+% OUTPUTS:
+% - model - a struct with 28 fields containing information required for 
+% TDOA tracking with GMPHD-SA filter. 
+%
+%
 % Pina Gruden, UH Manoa, April 2022. 
 
 

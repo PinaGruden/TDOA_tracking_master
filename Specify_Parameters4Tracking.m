@@ -1,6 +1,36 @@
 function [parameters]= Specify_Parameters4Tracking(sigtype,paramsXcorr)
-% SPECIFY PARAMETERS for MEASUREMENT EXTRACTION and TRACKING:
-
+% Use Specify_Parameters4Tracking.m to SPECIFY PARAMETERS for MEASUREMENT 
+% EXTRACTION and TRACKING. Change all parameters in sections labeled
+% "CHANGABLE".
+%
+% INPUTS:
+% - sigtype - a string specifying a signal type that is of interest. Needs
+%             to be 'whistles' or 'clicks' or 'both'.
+% - paramsXcorr - a structure with at least 3 fields:
+%       ~ d - a number specifying sensor separation (m)
+%       ~ c - a number specifying the speed of sound (m/s)
+%       ~ dt - a number specifying time increment between consecutive time 
+%       steps (in s)
+%
+% OUTPUTS:
+% - parameters - a structure with 8 fields:
+%       ~ lambda - a number specifying threshold above which the 
+%           cross-correlation peaks will be extracted
+%       ~ excl_deg - a number specifying a cut-off for bearings in degrees
+%       ~ tmax - maximum time (in s) to be considered in the noise sample
+%       ~ min_dist - a number specifying minimum distance between two 
+%           neighbouring peaks in the  cross-correlation function
+%       ~ excl_lags - a number specifying a threhold below which TDOAs are 
+%           not considered
+%       ~ min_tl - a number specifying a minimum track length criteria 
+%           (in s)
+%       ~ saveplotsofresults - a number specifying whether to save plots of
+%           results (1=yes,0 = no)
+%       ~ movingmeanlength - a number specifying the length of the moving 
+%           average (for track smoothing) (in time steps)
+%
+%
+% Pina Gruden, 2022, UH Manoa
 
 if sum([strcmp(sigtype,'clicks'),strcmp(sigtype,'whistles'),strcmp(sigtype,'both')])==0
     msg= 'Not a valid signal type option. Choose "whistles" or "clicks" or "both".';

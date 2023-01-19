@@ -1,18 +1,33 @@
 function [Est] = gmphd_adaptive_amplitude(model,measure)
-
-% Pina Gruden, 2020-2021
-
-% Based on Gruden, Nosal, Oleson (2021), JASA; Vo & Ma (2006), IEEE
-% Trans.Sig.Proces.; and Ristic, Clark, Vo & Vo (2012), IEEE Trans. Aerosp. Electron. Syst.
-
+% gmphd_adaptive_amplitude.m is a function that tracks multiple targets
+% using the Gaussian Mixture Probability Hypothesis Density- SA filter- 
+% it uses amplitude information to inform newborn target generation and 
+% updates newborn and persistent targets separately.
+%
+% INPUTS:
+% - model - a struct with 28 fields containing information required for 
+% TDOA tracking with GMPHD-SA filter. 
+% - measure = a struct with two fields:
+%   ~ measure.Z: a RFS of measurements- 1 x M cell array, where M is number  
+%           of time steps. Each cell contains TDOA and amplitude of the 
+%           cross-correlation information. 
+%   ~ measure.T: a scalar specifying the number of time steps M 
+%
 % OUTPUT:
 % Structure array Est with the following fields:
-% - Est.X = estimated states (means of Gaussian components)
-% - Est.w = weights associated to the estimates
-% - Est.N = estimated number of targets
-% - Est.Tag = identities of the estimates
-
-
+% - Est.X = estimated states (means of Gaussian components)- M x 1 cell,
+%       where M is number of time steps and each cell is a 2 x N matrix and 
+%       contains states (tdoas, velocity) of the N estimated targets 
+% - Est.w = weights associated to the estimates - M x 1 cell (M = number of 
+%       time steps), each cell 1 x N vector (N = number of targets)
+% - Est.N = estimated number of targets -M x 1 cell (M = number of time steps)
+% - Est.Tag = identities of the estimates -M x 1 cell (M = number of time 
+%       steps), each cell 1 x N vector (N = number of targets)
+%
+% Pina Gruden, 2020-2021
+%
+% Based on Gruden, Nosal, Oleson (2021), JASA; Vo & Ma (2006), IEEE
+% Trans.Sig.Proces.; and Ristic, Clark, Vo & Vo (2012), IEEE Trans. Aerosp. Electron. Syst.
 
 
 % Output pre-allocation

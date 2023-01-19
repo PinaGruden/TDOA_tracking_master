@@ -1,5 +1,18 @@
 function [folder, folder2save2] = Specify_Paths
-%CONFIGURE PATHS to recordings & folder to save measurements to:
+%Use Specify_Paths.m to CONFIGURE PATHS to recordings & folders to save 
+% data/results to. 
+%
+%OUTPUT:
+% - folder - a string specifying path to the folder where audio data is
+%           located
+% - folder2save2 - a structure specifying paths to where data is stored to.
+%                   Has two fields:
+%                   ~'rawcrosscorr' (path to where cross-correlogram 
+%                   will be stored);
+%                   ~'finalresults' (path to where final results will
+%                    be stored)
+
+%Pina Gruden, 2022, UH Manoa
 
 % Path to Raw data:
 s=what('./Test_example/Data/wav/'); % This is where your .wav files are located

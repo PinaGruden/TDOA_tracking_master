@@ -1,6 +1,8 @@
 %% EXTRACT MEASUREMENTS and TRACK TDOAs
-% A2_ExtractMeasurements_and_TrackTDOAs.m is a script that extracts measurements from
-% cross-correlograms. 
+% A2_ExtractMeasurements_and_TrackTDOAs.m is a script that:
+% - extracts measurements from cross-correlograms, and
+% - extracts TDOA tracks for sources that are present.
+%
 %!!!!!!!!!!!!!!!!!
 % IMPORTANT: This assumes that data for one encounter at the time is being
 % processed.

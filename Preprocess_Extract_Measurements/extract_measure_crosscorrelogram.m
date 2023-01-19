@@ -6,26 +6,34 @@ function [measure,Rxy_envelope_scaled,scalar] = extract_measure_crosscorrelogram
 % INPUTS:
 % - RT_envelope_ALL = Cross-correlogram- N x M matrix containing 
 %   cross-correlation values, N= length(lags), M = length(t)
-% - lags = TDOAs,
-% - t = time vector (in s)
-%varargin:
-% - varargin{1}= excl_lags = a value for TDOAs below which the TDOAs are
+% - lags = a 1 x N vector of TDOAs,
+% - t = a 1 x M vector of times (in s)
+% - lambda = a scalar specifying minimum amplitude threshold for the 
+%   normalized cross-correlation function (used to extract peaks from
+%   cross-corelogram)
+% - varargin:
+%   ~ varargin{1}= excl_lags = a value for TDOAs below which the TDOAs are
 %   excluded from further analysis- this is to avoid detecting a boat in 
 %   front of the array (negative TDOAs). Used in
 %   norm_background_crosscorr.m and extract_peaks_crosscorr.m
-% - varargin{2}= tmax = maximum time (s) to be considered in the noise sample- 
+%   ~ varargin{2}= tmax = maximum time (s) to be considered in the noise sample- 
 %   time from the beggining of the encounter up to before any significant 
 %   sources occur (e.g. 1000s). Used in norm_background_crosscorr.m
-% - varargin{3}= min_dist = minimum distance between two neighbouring
+%   ~ varargin{3}= min_dist = minimum distance between two neighbouring
 %   peaks. Used in extract_peaks_crosscorr.m 
 %
 % OUTPUTS:
-%- measure = RFS of measurements containing TDOA and amplitude 
-%   of the cross-correlation information
-%- RT_envelope_scaled = Rayleigh normalized cross-correlogram,
-%- scalar = scalar used to normalize cross-correlogram
-
-
+% - measure = a struct with two fields:
+%   ~ measure.Z: a RFS of measurements- 1 x M cell array, where M is number  
+%           of time steps. Each cell contains TDOA and amplitude of the 
+%           cross-correlation information. 
+%   ~ measure.T: a scalar specifying the number of time steps M 
+% - RT_envelope_scaled = Rayleigh normalized cross-correlogram- N x M matrix 
+%   containing normalized cross-correlation values, where N is number of 
+%   TDOAs, M is number of time steps
+% - scalar = scalar used to normalize cross-correlogram
+%
+%
 %Pina Gruden, UH Manoa, April 2022
 
 

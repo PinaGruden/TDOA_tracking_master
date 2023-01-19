@@ -1,10 +1,31 @@
 function [ Track ] = tracktarget_tdoa_labels(XTag,Xk,model)
-%tracking labels is a function that finds targets with the same label and
-%collects them into tracks.
-
+%tracktarget_tdoa_labels.m is a function that finds targets with the same 
+%label and collects them into tracks.
+%
+% INPUTS:
+% - XTag = labels of the targets' estimates- M x 1 cell (M = number of time 
+%       steps), each cell 1 x N vector (N = number of targets)
+% - Xk = estimated targets' states (means of Gaussian components)- M x 1 
+%       cell (M = number of time steps), each cell 2 x N matrix (N = number 
+%       of targets)
+% - model = a struct with 28 fields containing information required for 
+%   TDOA tracking with GMPHD-SA filter. Needs at least 3 fields:
+%       ~ dt - time step between consecutive windows (in s)
+%       ~ F - system matrix
+%       ~ Q - system noise covariance matrix
+% 
+%OUTPUTS:
+% - Track - a structure contatining each target (TDOA track) in a separate
+%       row. It has 5 fields:
+%       ~ tdoa - tdoas of a given target track
+%       ~ dottdoa - derivatives of the tdoas (i.e. velocity) of a given target track
+%       ~ time - times (from the begining of the encounter) of a given target track
+%       ~ label - labels (identities) of a given target track
+%       ~ ti - index to a time step (from the beginning of the encounter) of a given target track
+%
+%
 %Pina Gruden, 2020
 
-%based on the tracking_labels_v2.m from my PhD (from the SMCPHD)
 
 IDlist= unique([XTag{:}]);
 N=numel(IDlist); %number of all tracks

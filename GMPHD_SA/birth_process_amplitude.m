@@ -4,16 +4,25 @@ function [mb,wb,Pb,Tb,id] = birth_process_amplitude(model,Z,id)
 %
 %Inputs:
 % - model = structure specifying birth intensity and covariance matrix
-% - Z = measurements
-% - id = max identity of the components
+% - Z = measurements -a struct with two fields:
+%   ~ measure.Z: a RFS of measurements- 1 x M cell array, where M is number  
+%           of time steps. Each cell contains TDOA and amplitude of the 
+%           cross-correlation information. 
+%   ~ measure.T: a scalar specifying the number of time steps M 
+% - id = a number to track max identity of the components (the highest 
+%      label of the already existing components)
 %
 %Otuputs:
-% - mb = states of the newborn targets
-% - wb = weights of the newborn targets
-% - Pb = %covariance matirces of the newborn targets
-% - Tb = identity of the newborn components
-% - id = maximum identity of the components
-
+% - mb = states of the newborn targets - 2 x N matrix (N = number of
+%   targets)
+% - wb = weights of the newborn targets- 1 x N vector (N = number of
+%   targets)
+% - Pb = covariance matirces of the newborn targets - 2 x 2 x N array (N = 
+%   number of targets)
+% - Tb = identity of the newborn components - 1 x N vector (N = number of
+%   targets)
+% - id = a number specifying maximum identity of the components
+%
 %Pina Gruden, 2020
 
 if ~isempty(Z)
