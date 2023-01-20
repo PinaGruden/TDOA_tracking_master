@@ -7,6 +7,13 @@ For details see Gruden, P.,  Nosal, E.-M. and Oleson, E. (2021). Tracking time d
 Copyright (c) 2021, Pina Gruden
 
 
+## Required Matlab toolboxes
+
+This package was developed with Matlab version 2022a (9.12). It uses the following Matlab toolboxes:
+- Signal Processing Toolbox
+- Statistics and Machine Learning Toolbox
+- Curve Fitting Toolbox
+
 ## How to use
 
 Before running the package specify the array, paths and parameters for your application by modifying the following scripts: 
