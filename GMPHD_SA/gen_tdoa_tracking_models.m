@@ -105,7 +105,7 @@ model.c_pdf=1/(model.taumax-model.taumin);
 model.birth=BayesOptParams.nbirth;
 
 %birth velocity prior- learned from data based on bearing behaviour:
-model.bpv_type=2; 
+model.bpv_type=1; 
 model.dottdoa_birth=birthvelocity;
 
 % switch model.bpv_type
