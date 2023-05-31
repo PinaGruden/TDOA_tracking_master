@@ -48,6 +48,7 @@ Track=Track(indx);
 N=size(Track,2);
 tracks(N).time=[];
 tracks(N).time_local=[];
+tracks(N).ti=[];
 tracks(N).tdoa=[];
 
 for k=1:N
@@ -63,10 +64,12 @@ for k=1:N
         tdoa_smooth=movmean(tdoa,movemean_length);
         tracks(k).time=t';
         tracks(k).time_local = t_serialdate(Track(k).ti(1):Track(k).ti(end));
+        tracks(k).ti = Track(k).ti(1):Track(k).ti(end);
         tracks(k).tdoa=tdoa_smooth';
     else
         tracks(k).time=Track(k).time;
         tracks(k).time_local = t_serialdate(Track(k).ti);
+        tracks(k).ti=Track(k).ti;
         tracks(k).tdoa=Track(k).tdoa;
     end
 
