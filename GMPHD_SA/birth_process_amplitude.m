@@ -37,8 +37,8 @@ if ~isempty(Z)
     Mub(:,1) = Z(1,:); %centeres (means) of the GMM components (based on TDOAS)
     switch model.bpv_type
         case 1
-             Mub(:,2) = random(model.dottdoa_birth,N);
-%                 Mub(:,2) = 0; %Uninformed prior
+%              Mub(:,2) = random(model.dottdoa_birth,N);
+                Mub(:,2) = 0; %Uninformed prior
         case 2
             Zdeg=real(acosd((-model.c/model.d).*Z(1,:)));
             v=repmat(Zdeg',1,size(model.dottdoa_birth,2))-model.dottdoa_birth(1,:);
