@@ -6,8 +6,8 @@ function [model] = gen_tdoa_tracking_models(parameters, BayesoptResults,birthvel
 % INPUTS:
 % - parameters - a struct containing info on encounter, array, and
 % parameters used for measurement extraction
-% - BayesoptResults - object containing results of Bayesian optimization for
-% certain parameters (consider this as a trained prior information).
+% - BayesoptResults - a table containing results of Bayesian optimization 
+% for certain parameters (consider this as a trained prior information).
 % - birthvelocity - prior on the velocity component of newborn targets
 % (learned from data)- 2 x N matrix, where first row are N bearings and
 % second row are learned velocities.
@@ -20,7 +20,8 @@ function [model] = gen_tdoa_tracking_models(parameters, BayesoptResults,birthvel
 % Pina Gruden, UH Manoa, April 2022. 
 
 
-BayesOptParams=BayesoptResults.XAtMinObjective;
+% BayesOptParams=BayesoptResults.XAtMinObjective;
+BayesOptParams=BayesoptResults;
 
 % ////////////////// ARRAY PARAMETERS /////////////////////////////////////
 model.d=parameters.d; %sensor separation (in m)

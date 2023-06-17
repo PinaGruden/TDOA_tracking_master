@@ -105,7 +105,7 @@ disp('Tracking TDOAs from measurements...')
 load('BayesOptimization_GMPHDParams_GTchunked_lambda4_5_DiffBirth.mat')
 load('BirthVelocityPrior_AllTrainData.mat')
 
-[model] = gen_tdoa_tracking_models(parameters, BayesoptResults,birthvelocity);
+[model] = gen_tdoa_tracking_models(parameters,BayesOptParams,birthvelocity);
 
 % Employ GM-PHD-SA to track:
 Est = gmphd_adaptive_amplitude(model,measure); 

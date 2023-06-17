@@ -12,7 +12,6 @@ Copyright (c) 2021, Pina Gruden
 This package was developed with Matlab version 2022a (9.12). It uses the following Matlab toolboxes:
 - *Signal Processing Toolbox*
 - *Statistics and Machine Learning Toolbox*
-- *Curve Fitting Toolbox*
 
 ## Package contents
 Package contains folders and functions that execute pre-processing, measurement extraction and TDOA tracking.
