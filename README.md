@@ -56,7 +56,7 @@ The package contains the following folders in the main folder:
 - `postprocess.m` - removes short tracks and smooths the tracks.
 - `tracktarget_tdoa_labels.m` - finds targets with the same label and collects them into tracks.
 - `BayesOptimization_GMPHDParams_GTchunked_lambda4_5_DiffBirth.mat` - optimized parameters.
-- `BirthVelocityPrior_AllTrainData.mat` - birth velocity prior from trainig data.
+- `BirthVelocityPrior_AllTrainData.mat` - birth velocity prior from training data.
 
 3) **./Test_example/** - contains data to use for testing the package works correctly.
 
