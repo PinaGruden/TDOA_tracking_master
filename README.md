@@ -11,16 +11,17 @@ Gruden, P.,  Nosal, E.-M. and Oleson, E. (2021). Tracking time differences of ar
 Copyright (c) 2021, Pina Gruden
 
 
-## Required Matlab version and toolboxes
+## 1.1.  Required Matlab version and toolboxes
 
-This package was developed and tested with Matlab version 2022a (9.12). It uses the following Matlab toolboxes:
+This package was developed and tested with **Matlab version 2022a (9.12)**. It uses the following Matlab toolboxes:
 - *Signal Processing Toolbox*
 - *Statistics and Machine Learning Toolbox*
+- *Curve Fitting Toolbox*
 
-## Package contents
-Package contains folders and functions that execute pre-processing, measurement extraction and TDOA tracking.
+## 1.2. Package contents
+Package contains folders and functions that execute pre-processing, measurement extraction, and TDOA tracking.
 
-The package contains the following functions, scripts and files in the main folder:
+The package contains the following functions, scripts, and files in the main folder:
 
 - `A1_Compute_CrossCorrelograms.m` - main script that computes cross-correlograms.
 - `A2_ExtractMeasurements_and_TrackTDOAs.m` - main script that extracts measurements from cross-correlograms and extracts TDOA tracks from them.
@@ -33,15 +34,15 @@ The package contains the following functions, scripts and files in the main fold
 
 The package contains the following folders in the main folder:
 
-1) **./Preprocess_Extract_Measurements/** - contains code to pre-process audio files, to construct cross-correlograms and to extract measurements for tracking. Functions included are:
+1) **./Preprocess_Extract_Measurements/** - contains code to pre-process audio files, to construct cross-correlograms, and to extract measurements for tracking. Functions included are:
 
 - `compute_crosscorrelogram.m` - computes a cross-correlogram between two channels in audio data.
-- `extract_measure_crosscorrelogram.m` -  extracts TDOA and amplitude of the cross-correlation information form a cross-correlogram and saves it as a random finite set (RFS).
+- `extract_measure_crosscorrelogram.m` -  extracts TDOAs and amplitudes of the cross-correlation information from a cross-correlogram and saves it as a random finite set (RFS).
 - `extract_peaks_crosscorr.m`- extracts peaks from the cross-correlogram.
 - `gcc.m` - computes the generalized cross-correlation (GCC) of two signals. 
 - `getStrDateTime.m` - gets date and time from a file header.
 - `norm_background_crosscorr.m` - normalizes background noise to have std=1 under the Rayleigh assumption.
-- `preprocess.m` - applies de-cklicking of the signal. 
+- `preprocess.m` - applies de-clicking of the signal. 
 
 2) **./GMPHD_SA/** - contains code to extract TDOA tracks from cross-correlograms using GM-PHD-SA filter. Functions and files included are:
 
@@ -66,14 +67,21 @@ The package contains the following folders in the main folder:
 
 
 
-## How to use
+## 1.3.  How to use
 
-Before running the package specify the array, paths and parameters for your application by modifying the following scripts: 
-- `Array_info.csv` - If needed add the array information in a new row, specifying sensor separations for your array. Note- the name you give your array should then match the one you specify in the `Specify_Parameters4Xcorr.m`.
-- `Specify_Parameters4Xcorr.m` - This is where you specify your array, encounter information and settings for the cross-correlogram. Change any parameters in the sections labeled “ CHANGABLE:” as needed. 
-- `Specify_Parameters4Tracking.m` - This is where you specify parameters for measurement extraction and tracking. Change any parameters in the sections labeled “ CHANGABLE:” as needed. 
+In order to use this package you must first specify the array used to record the measurements and parameters that you want to use for tracking - see Section 1.3.1. After this, you can run the measurements extraction and tracking - see Section 1.3.2. 
+
+### 1.3.1. Modify
+
+First, specify paths, the array, and parameters for your application by modifying the following scripts: 
 - `Specify_Paths.m` - Specify folders where data is located and where results should be saved to. The expected data format are .wav files, and you can process either the full encounter or individual files. It is expected that you will be processing one encounter at the time (or if individual files are processed, that these files are from the same encounter). The expected name for .wav files is 'xxx_yyyyMMdd_HHmmss_SSS.wav', where 'xxx_' can be any string (or none), and 'yyyyMMdd_HHmmss_SSS' part of the name specifies the date (year, month, day) and time (hours, minutes, seconds, and milliseconds (SSS)).
+- `Array_info.csv` This is where your hydrophone array sensor separation is specified. If adding a new array, enter the array information and sensor separation in a new row. Note, the name you give your array should then match the one you specify in the `Specify_Parameters4Xcorr.m`.
 
+   **Important:** The hydrophone sensor spacing should be specified in a continuous manner in meters from the first to the last hydrophone. For example: Assume your array consists of two sub-arrays that are separated by a 20 m separator, and each sub-array has three sensors that are separated by 1 m. Further assume that your first sensor in each sub-array is placed right at the very beginning of a given sub-array, and assume the last sensor in each sub-array is placed right at the very end of a given sub-array. Then you enter the following values for hydrophones (each in a corresponding column): 0, 1, 2, 22, 23, 24. In practice, there is typically some separation between the beginning of the sub-array and the first sensor, and between the last sensor and the end of the sub-array (so measure and note sensor positions in a continuous manner). You will also have to enter the distance at which the array is towed behind the boat- this is a distance of your tow cable- from the back of the boat to the beginning of the first sub-array (or array if you only have one section with sensors). Carefully measure and note all sensor positions in a continuous manner. Insert -999 for fields where spacing is unknown (but the channel exists in the recordings), or if your number of sensors is less than 6. 
+- `Specify_Parameters4Xcorr.m` - This is where you specify your array, encounter information, and settings for the cross-correlogram. Scroll down to change any parameters in the sections labeled "CHANGABLE:" as needed.  
+- `Specify_Parameters4Tracking.m` - This is where you specify parameters for measurement extraction and tracking. Scroll down to change any parameters in the sections labeled "CHANGABLE:" as needed. 
+
+### 1.3.2. Run
 
 Then run the package by running:
 1) `A1_Compute_CrossCorrelograms.m` - This computes and saves the cross-correlogram based on your audio data. IMPORTANT: specify what signal type you want to be processing for (line 16)- choose either "clicks", "whistles", or "both", depending on your application.
@@ -82,10 +90,10 @@ Then run the package by running:
 
 ## Output
 
-The package outputs cross-correlograms, extracted TDOA tracks, and plots the results. 
+The package outputs cross-correlograms, extracted TDOA tracks, plots, and saves the results.
 
 Specifically, the outputs that are saved in a .mat file are:
-1) From `A1_Compute_CrossCorrelograms.m` part of the processing:
+1) From `A1_Compute_CrossCorrelograms.m`:
 - Cross-correlograms ('Rxy_envelope_ALL') (based on envelopes of the generalized cross-correlation function)- matrix with a dimension of NxM, where N is the number of time steps and M is the number of TDOAs. 
 - Range of possible TDOAs ('lags') - a vector of possible TDOAs for a given sensor separation.
 - Time vector ('t_serialdate') - a time vector in datetime format (for more info type help datetime in Matlab's command prompt)
@@ -93,12 +101,12 @@ Specifically, the outputs that are saved in a .mat file are:
 - Parameters used in the processing ('parameters')- these are parameters specifying array & encounter information, and parameters used in cross-correlogram computation.
 - Parameters used specifically in processing of clicks and/or whistles ('param_signal')
 
-2) From `A2_ExtractMeasurements_and_TrackTDOAs.m` part of the processing:
+2) From `A2_ExtractMeasurements_and_TrackTDOAs.m`:
 - Extracted TDOA tracks ('Tracks') - 1xM structure, where M is number of targets. For each target there are three fields: 'time', 'time_local','tdoa', where 'time' refers to time is seconds from the start of the file/encounter, 'time_local' refers to time in timedate format.
 - Models used in GM-PHD-SA filter ('model')- a structure array containing models and parameters for the filter.
-- Parameters used for normalization, measurement extraction and track extraction ('parameters_measure_tracking').
-- Parameters used in the cross-correlogram computation ('parameters'), (Comes from A1 part of the processing).
-- Parameters used specifically in processing of clicks and/or whistles ('parameters_clicks' and 'parameters_whistles' or 'param_signal'), (Comes from A1 part of the processing).
+- Parameters used for normalization, measurement extraction, and track extraction ('parameters_measure_tracking').
+- Parameters used in the cross-correlogram computation ('parameters'), (Comes from processing A1).
+- Parameters used specifically in processing of clicks and/or whistles ('parameters_clicks' and 'parameters_whistles' or 'param_signal'), (Comes from processing A1).
 - Scalars used for normalization of the cross-correlograms ('scalar_clicks' and 'scalar_whistles' or 'scalar').
 
 
