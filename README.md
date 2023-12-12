@@ -1,15 +1,19 @@
 # TDOA tracking package
 
-A Matlab package for multi-target tracking of Time-Differences-Of-Arrivals (TDOAs) of signals between two sensors from towed hydrophone array recordings.
+This is a Matlab based package that performs tracking of Time-Difference-Of-Arrivals (TDOAs) from multiple sources based on information from two moving sensors in a linear array. It was written and tested for towed arrays, but could also be used with stationary arrays.
 
-For details see Gruden, P.,  Nosal, E.-M. and Oleson, E. (2021). Tracking time differences of arrivals of multiple sound sources in the presence of clutter and missed detections. The Journal of the Acoustical Society of America  150(5): 3399--3416.
+The TDOAs are obtained from cross-correlograms, which are computed based on either clicks, whistles, or both. In addition to TDOAs, amplitudes are also obtained from the cross-correlograms. Both TDOAs and amplitudes represent measurements based on which the tracking is carried out. The tracking uses GM-PHD-SA filter (Gruden et al, 2021) to track (i.e., connect all TDOAs from one source or closely spaced group of sources into a continuous trajectory over time). See Gruden et al (2021) for more details on the cross-correlogram computation, extraction of measurements, and tracking.
+
+_References_:
+
+Gruden, P.,  Nosal, E.-M. and Oleson, E. (2021). Tracking time differences of arrivals of multiple sound sources in the presence of clutter and missed detections. The Journal of the Acoustical Society of America  150(5): 3399--3416.
 
 Copyright (c) 2021, Pina Gruden
 
 
-## Required Matlab toolboxes
+## Required Matlab version and toolboxes
 
-This package was developed with Matlab version 2022a (9.12). It uses the following Matlab toolboxes:
+This package was developed and tested with Matlab version 2022a (9.12). It uses the following Matlab toolboxes:
 - *Signal Processing Toolbox*
 - *Statistics and Machine Learning Toolbox*
 
