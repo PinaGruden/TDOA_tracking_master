@@ -11,14 +11,14 @@ Gruden, P.,  Nosal, E.-M. and Oleson, E. (2021). Tracking time differences of ar
 Copyright (c) 2021, Pina Gruden
 
 
-## 1.1.  Required Matlab version and toolboxes
+## 1.   Required Matlab version and toolboxes
 
 This package was developed and tested with **Matlab version 2022a (9.12)**. It uses the following Matlab toolboxes:
 - *Signal Processing Toolbox*
 - *Statistics and Machine Learning Toolbox*
 - *Curve Fitting Toolbox*
 
-## 1.2. Package contents
+## 2.  Package contents
 Package contains folders and functions that execute pre-processing, measurement extraction, and TDOA tracking.
 
 The package contains the following functions, scripts, and files in the main folder:
@@ -67,11 +67,11 @@ The package contains the following folders in the main folder:
 
 
 
-## 1.3.  How to use
+## 3.  How to use
 
-In order to use this package you must first specify the array used to record the measurements and parameters that you want to use for tracking - see Section 1.3.1. After this, you can run the measurements extraction and tracking - see Section 1.3.2. 
+In order to use this package you must first specify the array used to record the measurements and parameters that you want to use for tracking - see Section  3.1. After this, you can run the measurements extraction and tracking - see Section  3.2. 
 
-### 1.3.1. Modify
+###  3.1. Modify
 
 First, specify paths, the array, and parameters for your application by modifying the following scripts: 
 - `Specify_Paths.m` - Specify folders where data is located and where results should be saved to. The expected data format are .wav files, and you can process either the full encounter or individual files. It is expected that you will be processing one encounter at the time (or if individual files are processed, that these files are from the same encounter). The expected name for .wav files is 'xxx_yyyyMMdd_HHmmss_SSS.wav', where 'xxx_' can be any string (or none), and 'yyyyMMdd_HHmmss_SSS' part of the name specifies the date (year, month, day) and time (hours, minutes, seconds, and milliseconds (SSS)).
@@ -81,14 +81,14 @@ First, specify paths, the array, and parameters for your application by modifyin
 - `Specify_Parameters4Xcorr.m` - This is where you specify your array, encounter information, and settings for the cross-correlogram. Scroll down to change any parameters in the sections labeled "CHANGABLE:" as needed.  
 - `Specify_Parameters4Tracking.m` - This is where you specify parameters for measurement extraction and tracking. Scroll down to change any parameters in the sections labeled "CHANGABLE:" as needed. 
 
-### 1.3.2. Run
+###  3.2. Run
 
 Then run the package by running:
 1) `A1_Compute_CrossCorrelograms.m` - This computes and saves the cross-correlogram based on your audio data. IMPORTANT: specify what signal type you want to be processing for (line 16)- choose either "clicks", "whistles", or "both", depending on your application.
 2) `A2_ExtractMeasurements_and_TrackTDOAs.m` - This extracts measurements and tracks TDOAs based on that and returns the extracted TDOA tracks. Results are also displayed as plots.
 
 
-## Output
+## 4. Output
 
 The package outputs cross-correlograms, extracted TDOA tracks, plots, and saves the results.
 
