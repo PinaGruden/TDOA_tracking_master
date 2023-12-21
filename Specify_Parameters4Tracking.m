@@ -51,8 +51,9 @@ parameters.excl_deg = 15; % Cut off for bearings in degrees- e.g.
 % no bering smaller than 10 degrees will be considered
 
 % Specify maximum time (in s) to be considered in the noise sample- 
-%   time from the beggining of the encounter up to before any significant 
-%   sources occur (e.g. 1000s).
+% time from the beginning of the encounter until just before any 
+% significant sources occur (e.g. 1000s). Note, the longer the sample the
+% better the background estimation.
 parameters.tmax=100;
 
 % Specify minimum distance between two neighbouring cross-correlation peaks
