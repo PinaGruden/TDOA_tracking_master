@@ -110,33 +110,35 @@ parameters.window_length_s = 1; %1 s window
 % Specify proportion of overlap between consecutive windows
 parameters.overlap = 0.5; % 50% overlap
 
+%Specify the Bandpass Filter cut-off frequencies [lower, upper] (in Hz)
+%according to the species you are tracking. Examples from false killer
+%whales, sperm whales, rough toothed and Risso's dolphins are provided. 
+%Adjust varargout{.}.freq_filter frequencies as needed for your species.
 switch sigtype
     case 'clicks'
         varargout{1}.signal_type = 'clicks';
-        % Bandpass Filter cut-off frequencies [lower, upper] (in Hz)
-        % (determined based on which signal type is chosen):
         varargout{1}.freq_filter =[8000,30000]; % for false killer whales
-        %         varargout{1}.freq_filter =[5500,20000]; %for sperm whales
-%                 varargout{1}.freq_filter =[10000,80000]; %for Rissos dolphins
-% varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
+        %varargout{1}.freq_filter =[5500,20000]; %for sperm whales
+        %varargout{1}.freq_filter =[10000,80000]; %for Rissos dolphins
+        % varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
         parameters.signal_type = 'clicks'; %for plotting
     case 'whistles'
         varargout{1}.signal_type = 'whistles';
         varargout{1}.freq_filter =[2500,12000]; % for false killer whales
-%         varargout{1}.freq_filter =[3300,28000]; % for rough toothed dolphins (Rankin et al 2008)
+        %varargout{1}.freq_filter =[3300,28000]; % for rough toothed dolphins (Rankin et al 2008)
         parameters.signal_type = 'whistles'; %for plotting
     case 'both'
         varargout{1}.signal_type = 'clicks';
         % Bandpass Filter cut-off frequencies [lower, upper] (in Hz)
         % (determined based on which signal type is chosen):
         varargout{1}.freq_filter =[8000,30000]; % for false killer whales
-        %         varargout{1}.freq_filter =[5500,20000]; %for sperm whales
-        %         varargout{1}.freq_filter =[20000,80000]; %for Rissos dolphins
-%         varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
+        %varargout{1}.freq_filter =[5500,20000]; %for sperm whales
+        %varargout{1}.freq_filter =[20000,80000]; %for Rissos dolphins
+        %varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
         varargout{2}.signal_type = 'whistles';
         varargout{2}.freq_filter =[2500,12000]; % for false killer whales
-        %         varargout{2}.freq_filter =[2000,20000]; % for Rissos
-%         varargout{2}.freq_filter =[3300,28000]; % for rough toothed dolphins (Rankin et al 2008)
+        %varargout{2}.freq_filter =[2000,20000]; % for Rissos
+        %varargout{2}.freq_filter =[3300,28000]; % for rough toothed dolphins (Rankin et al 2008)
         parameters.signal_type = 'both'; %for plotting
 end
 
