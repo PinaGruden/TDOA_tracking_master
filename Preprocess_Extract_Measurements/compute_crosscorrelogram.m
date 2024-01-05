@@ -57,8 +57,6 @@ window_length_s=parameters.window_length_s;
 overlap=parameters.overlap;
 dt=parameters.dt;
 method = parameters.method;
-d=parameters.d;
-c=parameters.c;
 plotfig=parameters.plotcrosscorr;
 saveworksp=parameters.saveworksp;
 
@@ -91,6 +89,7 @@ for k=1:N
 info = audioinfo([file1(k).folder,'/',file1(k).name]);
 duration_file(k)=info.Duration;
 end
+fs=info.SampleRate; %this assumes all files have the same sampling rate
 
 actual_gaps=diff(timestamps);
 expected_gaps=seconds(round(duration_file(1:end-1))); 
@@ -105,14 +104,35 @@ flagf=find(index)+1;
 Nstepsmissing=seconds(actual_gaps(index)-expected_gaps(index))./dt;
 
 %-----------------------------------------------------------------
+% Get GLOBAL TIME vector
+%-----------------------------------------------------------------
+dur_last=duration_file(end);
+
+t_datetime=timestamps(1):seconds(dt):timestamps(end)+seconds(dur_last)-seconds(dt);
+t_serialdate=datenum(t_datetime);
+
+%-----------------------------------------------------------------
 % COMPUTE GCC
 %-----------------------------------------------------------------
+
+tau_max_samples= round(parameters.tau_max*fs); %maximum physically possible lag in samples
+window_length_samples=window_length_s*fs;
+
 %pre-allocate
+
+%Display a warning if max lag that is mathematically possible (i.e.
+% dependent on the chosen window length) is shorter than
+% lag that is physically possible
+if window_length_s < parameters.tau_max
+    fprintf(['WARNING: your chosen window length for cross-correlation ' ...
+        'results in a maximum TDOA (parameters.window_length_s = %0.2f s) \n ' ...
+        'that is shorter than what is physically possible (parameters.tau_max = %0.2f s).\n ' ...
+        'Consider using a longer window in xcorrparam.win_width.\n'],parameters.window_length_s,parameters.tau_max);
+end
+
+L=min(tau_max_samples*2+1,window_length_samples*2-1);
 M=round((seconds(timestamps(end)-timestamps(1))+duration_file(end))./dt);
-fs=info.SampleRate; %this assumes all files have the same sampling rate
-L= round((d/c*1.1)*2*fs); %cross-correlogram lags are limited by the sensor 
-% separation- the lags will be between -d/c and d/c and we add 10% on top 
-% in case distance is not accurately measured
+
 Rxy_envelope_ALL= zeros(L,M);
 
 start=1;
@@ -125,6 +145,10 @@ start=1;
         %Select the two channels to process
         x = x(:,channels);
         
+        % ADD A CHECK FOR FILE LENGTH given expected duration and either
+        % truncate or zero pad
+
+
         %read the next file (one window length of the next file)
         if k<N
         [x1,~]=audioread([folder1,'/',file1(k+1).name],[1,window_length_s*fs]); 
@@ -154,13 +178,11 @@ start=1;
         
         %% SPECIFY PARAMS for GCC and do GCC
         
-        win_length=window_length_s*fs; %WINDOW LENGTH FOR GCC in samples
-        win_step=1-overlap; %proportion
         HT=1; %compute envelope via Hilbert transform
         
-        [~,lags,RT_envelope,~] = gcc(y,y1,fs,win_length,overlap,method,freq_filter,HT);
+        [~,lags,RT_envelope,~] = gcc(y,y1,fs,window_length_samples,overlap,method,freq_filter,HT);
 
-        ind = find(abs(lags)<d/c*1.1); %d/c*1.1 add 10% more values to the search in case the separation wasn't measured accuretly
+        ind = find(abs(lags)<parameters.tau_max); %get only lags that are physically possible
         lags=lags(ind);
         RT_envelope = RT_envelope(ind,:);
 
@@ -180,11 +202,7 @@ start=1;
 
     t=(0:(size(Rxy_envelope_ALL,2)-1)).*dt; %start times of frames, in seconds (for easier plotting)
 
-    dur_last=duration_file(end);
-
-%     t_datetime=timestamps(1):seconds(dt):timestamps(end)+seconds(dur_last)-seconds(dt);
-    t_datetime=timestamps(1):seconds(dt):timestamps(end)+seconds(dur_last);
-    t_serialdate=datenum(t_datetime);
+    
 
     %% SAVE WORKSPACE containing CROSS-CORELOGRAM
     
@@ -222,7 +240,7 @@ start=1;
         imagesc(t_serialdate,lags,Rxy_envelope_ALL), datetick('x','keeplimits');
         colormap(flipud(gray(256)))
         colorbar
-        ylim([-d/c,d/c])
+        ylim([-parameters.tau_max,parameters.tau_max])
         xlabel('Local Time (HH:MM)'), ylabel('TDOA (s)'),
         title(['Cross-correlogram based on ',signal_type])
         set(gca,'FontSize',12)
