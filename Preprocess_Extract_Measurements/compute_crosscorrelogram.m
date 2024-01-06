@@ -91,17 +91,17 @@ duration_file(k)=info.Duration;
 end
 fs=info.SampleRate; %this assumes all files have the same sampling rate
 
-actual_gaps=diff(timestamps);
-expected_gaps=seconds(round(duration_file(1:end-1))); 
-% duration_file(1:end-1) - the last file not considered since there is nothing after it
+% DETERMINE if there is a MISMATCH to expected length of files:
+expected_nexttimestamp= timestamps + seconds(duration_file); 
+%based on a duration of each file and the beginning time stamp this should
+%be end of file timestamp and thus beginning of next file timestamp
 
-index=actual_gaps>expected_gaps;
-flagf=find(index)+1;
-%need to add +1 since the index should be to the file before which the gap
-%occurs.
+starttiming_mismatch = zeros(N,1);
+starttiming_mismatch(2:end)=seconds(timestamps(2:end)-expected_nexttimestamp(1:end-1));
+% If it is a negative sign it means the file started that many milliseconds
+% too early. If it is a positive sign it means the file started that many
+% milliseconds/seconds too late and there is a gap
 
-%Number of missing time steps for each file:
-Nstepsmissing=seconds(actual_gaps(index)-expected_gaps(index))./dt;
 
 %-----------------------------------------------------------------
 % Get GLOBAL TIME vector
@@ -135,7 +135,7 @@ M=round((seconds(timestamps(end)-timestamps(1))+duration_file(end))./dt);
 
 Rxy_envelope_ALL= zeros(L,M);
 
-start=1;
+stop=0;
     for k = 1:N %iterate through files in the folder
       
         %% Read the WAV file
@@ -145,16 +145,26 @@ start=1;
         %Select the two channels to process
         x = x(:,channels);
         
-        % ADD A CHECK FOR FILE LENGTH given expected duration and either
-        % truncate or zero pad
-
-
+        % CHECK FOR FILE LENGTH and correct if necessary
+        [x,Nstepsmissing] = correct_files(starttiming_mismatch(k),x,fs,dt);
+        start = stop+1+round(Nstepsmissing);
+       
         %read the next file (one window length of the next file)
         if k<N
-        [x1,~]=audioread([folder1,'/',file1(k+1).name],[1,window_length_s*fs]); 
-        x1 = x1(:,channels);
+            [x1,~]=audioread([folder1,'/',file1(k+1).name],[1,window_length_s*fs]);
+            x1 = x1(:,channels);
+
+            % CHECK FOR FILE LENGTH and correct if necessary
+            [x1,Nstepsmissing_x1] = correct_files(starttiming_mismatch(k+1),x1,fs,dt);
+
+            % If there are no missing steps, ok to read the next file x1,
+            % otherwise one should not
+            if Nstepsmissing_x1>0
+                x1=[];
+            end
+
         else %you are reading the last file of the encounter, so there is no file after
-          x1=[];  
+            x1=[];
         end
           
         %% Specify FILTERS and do FILTERING
@@ -188,12 +198,9 @@ start=1;
 
         [m,M]=size(RT_envelope);
         stop = start+M-1;
+      
         Rxy_envelope_ALL(1:m,start:stop) = RT_envelope;
-        if any(k==flagf-1) %if this is a file after which the gap occurs
-            start = stop+1+round(Nstepsmissing(k==flagf-1));
-        else
-            start = stop+1;
-        end
+
 
     end
 
