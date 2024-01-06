@@ -91,7 +91,11 @@ else
         'info to it and try again.'];
     error(msg)
 end
- 
+
+parameters.tau_max=parameters.d/parameters.c*1.1; %maximum physically possible lag in seconds (plus 10%)
+ %cross-correlogram lags are limited by the sensor 
+% separation- the lags will be between -d/c and d/c and we add 10% on top 
+% in case distance is not accurately measured
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 %///////////////////////////////////////////////////////////////////////
@@ -119,7 +123,7 @@ switch sigtype
         varargout{1}.signal_type = 'clicks';
         % Bandpass Filter cut-off frequencies [lower, upper] (in Hz)
         varargout{1}.freq_filter =[8000,30000]; % for false killer whales
-        %varargout{1}.freq_filter =[5500,20000]; %for sperm whales
+        % varargout{1}.freq_filter =[5500,20000]; %for sperm whales
         %varargout{1}.freq_filter =[10000,80000]; %for Rissos dolphins
         % varargout{1}.freq_filter =[10000,50000]; % for rough toothed dolphins (Rankin et al 2008)
         parameters.signal_type = 'clicks'; %for plotting
@@ -158,7 +162,7 @@ parameters.saveworksp=1; % Save cross-correlogram & parameters (0=no,1=yes)
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~COMPUTED:~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Time increment between consecutive GCC windows (in s) (computed from 
 % window length and overlap):
-parameters.dt=(1-parameters.overlap)*parameters.window_length_s;
+parameters.dt=(1-parameters.overlap)*parameters.window_length_s;  
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 %///////////////////////////////////////////////////////////////////////
