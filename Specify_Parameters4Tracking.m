@@ -56,7 +56,12 @@ parameters.excl_deg = 15; % Cut off for bearings in degrees- e.g.
 % better the background estimation.
 parameters.tmax=100;
 
-% Specify minimum distance between two neighbouring cross-correlation peaks
+% Specify minimum distance (in seconds) between two neighbouring cross-correlation peaks
+%!!!!!!!!!!!!!!!
+% NOTE: minumum distance (in seconds) should be LESS than 2 * max possible
+%TDOA (determined by your sensor separation- 2*max_{tdoa} = 2*d/c -
+%specified in Specify_Parameters4Xcorr.m)
+%!!!!!!!!!!!!!!!!
 parameters.min_dist=0.0031; % For FKW whistles- based on the simulation for
         %signals of 600 Hz bandwidth- if two sources are closer than that 
         %they will not be separated
@@ -64,6 +69,18 @@ parameters.min_dist=0.0031; % For FKW whistles- based on the simulation for
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~COMPUTED:~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Check if parameters.min_dist < paramsXcorr.tau_max and if not warn the user
+% to either decrease min_dist OR increase sensor separation d in
+% Specify_Parameters4Xcorr.m - i.e. use different channels.
+if parameters.min_dist>=paramsXcorr.tau_max
+    error(['The chosen parameters.min_dist- i.e. minimum distance between two ' ...
+        'neighboring peaks in cross-correlation is BIGGER than what is ' ...
+        'physically possible - i.e. it exceeds 2 x maximum possible TDOA ' ...
+        'determined based on sensor separation d in Specify_Parameters4Xcorr.m.' ...
+        ' EITHER decrease the min_dist (in Specify_Parameters4Tracking.m) ' ...
+        'OR choose to process sensors with bigger separation (in Specify_Parameters4Xcorr.m).'])
+end
+
 %A threhold below which TDOAs are not considered - exclude TDOAs directly in front of the array- boat 
 %( the way we specify the TDOAs ahead are negative)
 parameters.excl_lags=-cosd(parameters.excl_deg)*paramsXcorr.d/paramsXcorr.c; 
