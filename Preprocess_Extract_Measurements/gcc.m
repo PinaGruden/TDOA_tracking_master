@@ -71,7 +71,6 @@ w=hann(win_width);w=w(:);
 % w=chebwin(win_width,60);w=w(:); %w = chebwin(L,r) returns an L-point Chebyshev window using sidelobe magnitude factor r dB.
 
 dt = slide_incr/fs; %time increment between frames in seconds
-t=0:dt:(length(x)/fs-dt); %start times of frames, in seconds (for easier plotting)
 
 % numstps = ceil((length(x)-(win_width))/slide_incr); %Number of windows
 %If I wanted to include the last few samples/the whole of x, I would need to do:
@@ -87,6 +86,7 @@ else
     x= [x;y(1:nzeros,:)];%Add the required number of samples from y to the current file x
 end
 
+t=0:dt:(length(x)/fs-win_width/fs); %start times of frames, in seconds (for easier plotting)
 
 %~~~~~~~~~~~~~~~~DO A SLIDING WINDOW and COMPUTE GCC-PHAT~~~~~~~~~~~~~~~~
 
