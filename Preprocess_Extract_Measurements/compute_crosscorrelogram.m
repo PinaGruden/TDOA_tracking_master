@@ -82,7 +82,7 @@ N=size(file1,1);
 %(this is important if there are missing times between consecutive files):
 FormatIn='yyyyMMdd_HHmmss_SSS'; % use if youre using datetime function
 datenumberString = getStrDateTime(file1,FormatIn);
-timestamps = datetime(datenumberString,'InputFormat',FormatIn);
+time_start = datetime(datenumberString,'InputFormat',FormatIn);
 
 duration_file=zeros(N,1);
 for k=1:N
@@ -92,24 +92,24 @@ end
 fs=info.SampleRate; %this assumes all files have the same sampling rate
 
 % DETERMINE if there is a MISMATCH to expected length of files:
-expected_nexttimestamp= timestamps + seconds(duration_file); 
+time_end= time_start + seconds(duration_file); 
 %based on a duration of each file and the beginning time stamp this should
 %be end of file timestamp and thus beginning of next file timestamp
 
 starttiming_mismatch = zeros(N,1);
-starttiming_mismatch(2:end)=seconds(timestamps(2:end)-expected_nexttimestamp(1:end-1));
+starttiming_mismatch(2:end)=seconds(time_start(2:end)-time_end(1:end-1));
 % If it is a negative sign it means the file started that many milliseconds
 % too early. If it is a positive sign it means the file started that many
 % milliseconds/seconds too late and there is a gap
 
 
-%-----------------------------------------------------------------
-% Get GLOBAL TIME vector
-%-----------------------------------------------------------------
-dur_last=duration_file(end);
-
-t_datetime=timestamps(1):seconds(dt):timestamps(end)+seconds(dur_last)-seconds(dt);
-t_serialdate=datenum(t_datetime);
+% %-----------------------------------------------------------------
+% % Get GLOBAL TIME vector
+% %-----------------------------------------------------------------
+% dur_last=duration_file(end);
+% 
+% t_datetime=time_start(1):seconds(dt):time_start(end)+seconds(dur_last);
+% t_serialdate=datenum(t_datetime);
 
 %-----------------------------------------------------------------
 % COMPUTE GCC
@@ -131,7 +131,7 @@ if window_length_s < parameters.tau_max
 end
 
 L=min(tau_max_samples*2+1,window_length_samples*2-1);
-M=round((seconds(timestamps(end)-timestamps(1))+duration_file(end))./dt);
+M=ceil((seconds(time_start(end)-time_start(1))+duration_file(end))./dt);
 
 Rxy_envelope_ALL= zeros(L,M);
 
@@ -209,8 +209,12 @@ stop=0;
 
     t=(0:(size(Rxy_envelope_ALL,2)-1)).*dt; %start times of frames, in seconds (for easier plotting)
 
+    %-----------------------------------------------------------------
+    % Get GLOBAL TIME vector
+    %-----------------------------------------------------------------
+    t_datetime=time_start(1)+seconds(t);
+    t_serialdate=datenum(t_datetime);
     
-
     %% SAVE WORKSPACE containing CROSS-CORELOGRAM
     
     if saveworksp==1
