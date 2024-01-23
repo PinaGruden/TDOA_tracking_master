@@ -129,13 +129,6 @@ global_time_end= newdatetime(last_file_end)+ seconds(global_time_end_s);
 %start time of each time step from all files in datetime format
 global_time=global_time_start:seconds(dt):global_time_end;
 
-% NOW I will have to modify below to compare each start of the individual
-% files to the global time and either zero pad at the start 
-
-% dur_last=duration_file(end);
-% 
-% t_datetime=time_start(1):seconds(dt):time_start(end)+seconds(dur_last);
-% t_serialdate=datenum(t_datetime);
 t_serialdate=datenum(global_time);
 
 
@@ -145,8 +138,6 @@ t_serialdate=datenum(global_time);
 
 tau_max_samples= round(parameters.tau_max*fs); %maximum physically possible lag in samples
 window_length_samples=window_length_s*fs;
-
-%pre-allocate
 
 %Display a warning if max lag that is mathematically possible (i.e.
 % dependent on the chosen window length) is shorter than
@@ -158,6 +149,8 @@ if window_length_s < parameters.tau_max
         'Consider using a longer window in xcorrparam.win_width.\n'],parameters.window_length_s,parameters.tau_max);
 end
 
+
+%pre-allocate
 L=min(tau_max_samples*2+1,window_length_samples*2-1);
 M=length(global_time);
 
