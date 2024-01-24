@@ -164,7 +164,7 @@ for k = 1:N %iterate through files in the folder
     indx_timestep_start=find((global_time-time_start(k))<=0); %these are indices of all timesteps before the file starts
     indx_timestep_start_k(k)=indx_timestep_start(end); %take the last index in the list to be the time step where the file starts
 
-    indx_timestep_end=find((global_time-time_end(k))<=0); %these are indices of all timesteps before the file starts
+    indx_timestep_end=find((global_time-time_end(k))<0); %these are indices of all timesteps before the file starts
     indx_timestep_end_k(k)=indx_timestep_end(end); %take the last index in the list to be the time step where the file starts
 end
 
@@ -196,7 +196,7 @@ end
 
             % indx_overlap_timestep= indx_timestep_end_k(loc);
             start_time_read=global_time(indx_timestep_start_k(k)+1); %we want to start reading the file at the next time step (thus +1)
-            start_sample=round(seconds(start_time_read-(time_start(k)))*fs);
+            start_sample=round(seconds(start_time_read-(time_start(k)))*fs)+1;
 
             x = x(start_sample:end,:);
 
@@ -223,13 +223,18 @@ end
         % 2) Get x1 (input for GCC) - this sorts our the end of x array-
         % the last window of GCC
 
-        [L2]=ismember(indx_timestep_end_k(k),indx_timestep_start_k);
+        % [L2]=ismember(indx_timestep_end_k(k),indx_timestep_start_k);
+        if k<N
+            [L2]=seconds(time_start(k+1) - global_time(indx_timestep_end_k(k)))<window_length_s;
+        else %if k is the last file then there is no other file after, so L2 must be false
+            L2=false;
+        end
 
         if L2 % when there is another file starting at the same time step that k-th file ends
             file2_start_delay = seconds(time_start(k+1) - time_end(k)); % delay in start of the k+1 file relative to the k-th file (in seconds)
 
 
-            if file2_start_delay>=1/fs % the files are non-overlapping
+            if file2_start_delay>=0 % the files are non-overlapping
                 %figure out how many samples are in the gap between x and x1 (so start of x1)
 
                 missing_samples2=(file2_start_delay*fs); % delay in start of the file in samples
