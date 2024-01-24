@@ -297,7 +297,7 @@ end
         
         [~,lags,RT_envelope,~] = gcc(y,y1,fs,window_length_samples,overlap,method,freq_filter,HT);
 
-        ind = find(abs(lags)<parameters.tau_max); %get only lags that are physically possible
+        ind = find(abs(lags)<=parameters.tau_max); %get only lags that are physically possible
         lags=lags(ind);
         RT_envelope = RT_envelope(ind,:);
 
