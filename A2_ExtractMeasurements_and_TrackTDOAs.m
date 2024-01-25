@@ -130,15 +130,18 @@ end
 
 %% SAVE:
 
-if N==1 % Only Clicks or Whistles were used to create Cross-correlograms
-
-    save([folder2save2.finalresults,parameters.encounter,'_Results.mat'],...
-        'model','Tracks','scalar','parameters','param_signal','parameters_measure_tracking')
-
-else  %Both Clicks and Whistles were used to create Cross-correlograms
-
-    save([folder2save2.finalresults,parameters.encounter,'_Results.mat'],...
-        'model','Tracks','scalar_clicks', 'scalar_whistles', ...
+switch parameters.signal_type
+    case 'clicks' % Only Clicks were used to create Cross-correlograms
+        scalar_clicks=scalar;
+        save([folder2save2.finalresults,parameters.encounter,'_Results.mat'],...
+            'model','Tracks','scalar_clicks','parameters','param_signal','parameters_measure_tracking')
+    case 'whistles' % Only Whistles were used to create Cross-correlograms
+        scalar_whistles=scalar;
+        save([folder2save2.finalresults,parameters.encounter,'_Results.mat'],...
+            'model','Tracks','scalar_whistles','parameters','param_signal','parameters_measure_tracking')
+    case 'both' %Both Clicks and Whistles were used to create Cross-correlograms
+        save([folder2save2.finalresults,parameters.encounter,'_Results.mat'],...
+            'model','Tracks','scalar_clicks', 'scalar_whistles', ...
             'parameters','parameters_whistles','parameters_clicks','parameters_measure_tracking')
-
 end
+
