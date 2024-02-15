@@ -136,9 +136,6 @@ t_serialdate=datenum(global_time);
 % COMPUTE GCC
 %-----------------------------------------------------------------
 
-tau_max_samples= round(parameters.tau_max*fs); %maximum physically possible lag in samples
-window_length_samples=window_length_s*fs;
-
 %Display a warning if max lag that is mathematically possible (i.e.
 % dependent on the chosen window length) is shorter than
 % lag that is physically possible
@@ -151,7 +148,11 @@ end
 
 
 %pre-allocate
-L=min(tau_max_samples*2+1,window_length_samples*2-1);
+tau_max_samples= floor(parameters.tau_max*fs); %maximum physically possible lag in samples
+window_length_samples=window_length_s*fs;
+
+% L=min(tau_max_samples*2+1,window_length_samples*2-1);
+L=min(tau_max_samples*2+1,window_length_samples);
 M=length(global_time);
 
 Rxy_envelope_ALL= zeros(L,M);
