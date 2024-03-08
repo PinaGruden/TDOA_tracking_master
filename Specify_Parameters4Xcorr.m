@@ -13,8 +13,7 @@ function [parameters,varargout]= Specify_Parameters4Xcorr(sigtype)
 %       ~ parameters.year - a scalar specifying the year of the survey
 %       ~ parameters.arrayname - a string specifying the array name (should
 %         match the name in Array_info.csv)
-%       ~ parameters.encounter- a string specifying the encounter name (should
-%         match the name in Array_info.csv)
+%       ~ parameters.encounter- a string specifying the encounter name
 %       ~ parameters.c - a scalar specifying the speed of sound (m/s)
 %       ~ parameters.channels - 1 x 2 vector specifying sensor channels to
 %           be used for processing
