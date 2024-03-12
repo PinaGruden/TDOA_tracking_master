@@ -8,7 +8,7 @@ The TDOAs are obtained from cross-correlograms, which are computed based on eith
 
 - Gruden, P.,  Nosal, E.-M. and Oleson, E. (2021). Tracking time differences of arrivals of multiple sound sources in the presence of clutter and missed detections. The Journal of the Acoustical Society of America  150(5): 3399--3416.
 
-Copyright (c) 2021, Pina Gruden
+Copyright (c) 2024, Pina Gruden
 
 
 ## 1.   Required Matlab version and toolboxes
