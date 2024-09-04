@@ -33,6 +33,7 @@ function [Est] = gmphd_adaptive_amplitude(model,measure)
 % Output pre-allocation
 % Est.gmphd = gmphd;
 Est.X= cell(measure.T,1); %estimated states (means of Gaussian components)
+Est.P= cell(measure.T,1);
 Est.w= cell(measure.T,1);
 Est.N = zeros(measure.T,1); %estimated number of targets
 Est.Tag = cell(measure.T,1); %Identity tags of the estimates
@@ -132,6 +133,7 @@ for k=1:measure.T
     %///////////// Estimate States ////////////////
     idx = find(w_update > model.wth);
     Est.X{k}=m_update(:,idx);
+    Est.P{k}=P_update(:,:,idx);
     Est.N(k)=size(Est.X{k},2);
     Est.w{k}=w_update(idx);
     if ~isempty(idx)
