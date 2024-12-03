@@ -100,6 +100,12 @@ parameters.min_tl=3; %in s
 % track smoothing & interpolation is desired then set movingmeanlength_s=0;
 movingmeanlength_s=5; %in s
 
+% Specify if you want to forward-backward smooth labels of the estimates
+% (can help resolve some deviations of the tracks when multiple estimates
+% get assigned the same label at the same time step): to use the smoother
+% choose true, otherwise choose false:
+parameters.rts=false; %(true/false)
+
 %Save result Plots - specify if you want to save plots of your results (1=yes,0 = no)
 parameters.saveplotsofresults=1;
 

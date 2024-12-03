@@ -109,7 +109,11 @@ load('BirthVelocityPrior_AllTrainData.mat')
 
 % Employ GM-PHD-SA to track:
 Est = gmphd_adaptive_amplitude(model,measure); 
+if parameters_measure_tracking.rts
+Track = tracktarget_labels_1D_smoothed(Est.Tag,Est.X,Est.P,Est.w,model);
+else
 Track = tracktarget_tdoa_labels(Est.Tag,Est.X,model);
+end
 
 % Interpolate and smooth tracks, apply min track length criteria:
 [Tracks] = postprocess(Track,t_serialdate,parameters);
