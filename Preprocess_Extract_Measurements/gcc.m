@@ -256,12 +256,19 @@ for k=1:numstps %do sliding window
 end
 
 % truncate the RT to be win_width long, centered at 0 lag:
-RT = RT((nfft/2+1)-win_width/2:(nfft/2+1)+win_width/2-1,:);
+% RT = RT((nfft/2+1)-win_width/2:(nfft/2+1)+win_width/2-1,:);
+% if HT==1
+%     RT_envelope = RT_envelope((nfft/2+1)-win_width/2:(nfft/2+1)+win_width/2-1,:);
+% end
+% %Define lags
+% lags= -win_width/2:win_width/2-1; %Taking only win_width points in the middle of cross-correlation
+
+%edited to match with Matlab's "xcorr" return:
+RT = RT((nfft/2+1)-(win_width-1):(nfft/2+1)+(win_width-1),:);
 if HT==1
-    RT_envelope = RT_envelope((nfft/2+1)-win_width/2:(nfft/2+1)+win_width/2-1,:);
+    RT_envelope = RT_envelope((nfft/2+1)-(win_width-1):(nfft/2+1)+(win_width-1),:);
 end
-%Define lags
-lags= -win_width/2:win_width/2-1; %Taking only win_width points in the middle of cross-correlation
+lags= -(win_width-1):(win_width-1);
 lags=lags/fs;
 
 end
