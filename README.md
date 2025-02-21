@@ -19,7 +19,7 @@ It uses the following Matlab toolboxes:
 
 - *Signal Processing Toolbox*
 - *Statistics and Machine Learning Toolbox*
-- *Curve Fitting Toolbox*
+
 
 ## 2.  Package contents
 Package contains folders and functions that execute pre-processing, measurement extraction, and TDOA tracking.
