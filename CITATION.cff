@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite both the software and the article listed under preferred-citation."
+message: "If you use this software, please cite it and the associated JASA (2021) article."
 type: software
 title: "TDOA_tracking_master: Multi-target tracking of time-differences-of-arrival"
 version: 1.1.0
@@ -13,9 +13,17 @@ authors:
 license: BSD-3-Clause-Clear
 repository-code: "https://github.com/PinaGruden/TDOA_tracking_master"
 abstract: >-
-  A MATLAB package for multi-target tracking of time-differences-of-arrival
-  (TDOAs) of signals between two sensors, in the presence of clutter and
-  missed detections.
+  TDOA_tracking_master is a MATLAB package for multi-target tracking of
+  time-differences-of-arrival (TDOAs) of acoustic signals between two sensors.
+  It was developed and tested for towed hydrophone arrays and can also be
+  used with stationary arrays. The package computes generalized
+  cross-correlograms from multichannel recordings of clicks, whistles or
+  both, extracts TDOA measurements, and links them into continuous
+  trajectories using a Gaussian mixture probability hypothesis density
+  filter (GM-PHD-SA) that handles multiple simultaneous sources, clutter and
+  missed detections. Filter parameters and birth priors were optimized on
+  training data. Output tracks are used directly by the companion package
+  Localization_Towed_Array for localizing sources.
 keywords:
   - passive acoustic monitoring
   - multi-target tracking
