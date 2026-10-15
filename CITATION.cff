@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite both the software and the article listed under preferred-citation."
 type: software
 title: "TDOA_tracking_master: Multi-target tracking of time-differences-of-arrival"
-version: X.Y.Z
+version: 1.1.0
 date-released: 2026-10-15
 authors:
   - family-names: Gruden
