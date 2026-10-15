@@ -4,6 +4,7 @@ type: software
 title: "TDOA_tracking_master: Multi-target tracking of time-differences-of-arrival"
 version: 1.1.0
 date-released: 2026-10-15
+DOI: 10.5281/zenodo.23399605
 authors:
   - family-names: Gruden
     given-names: Pina
