@@ -1,4 +1,5 @@
 # TDOA tracking master package
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23399605.svg)](https://doi.org/10.5281/zenodo.23399605)
 
 This is a Matlab based package that performs tracking of Time-Difference-Of-Arrivals (TDOAs) from multiple sources based on information from two moving sensors in a linear array. It was written and tested for towed arrays, but could also be used with stationary arrays.
 
