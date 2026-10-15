@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the article listed under preferred-citation."
+type: software
+title: "TDOA_tracking_master: Multi-target tracking of time-differences-of-arrival"
+version: X.Y.Z
+date-released: 2026-10-15
+authors:
+  - family-names: Gruden
+    given-names: Pina
+    orcid: "https://orcid.org/0000-0001-8756-6514"
+    affiliation: "Pina Gruden s.p."
+license: BSD-3-Clause-Clear
+repository-code: "https://github.com/PinaGruden/TDOA_tracking_master"
+abstract: >-
+  A MATLAB package for multi-target tracking of time-differences-of-arrival
+  (TDOAs) of signals between two sensors, in the presence of clutter and
+  missed detections.
+keywords:
+  - passive acoustic monitoring
+  - multi-target tracking
+  - time difference of arrival
+  - marine mammals
+  - MATLAB
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Gruden
+      given-names: Pina
+      orcid: "https://orcid.org/0000-0001-8756-6514"
+    - family-names: Nosal
+      given-names: Eva-Marie
+    - family-names: Oleson
+      given-names: Erin M.
+  title: "Tracking time differences of arrivals of multiple sound sources in the presence of clutter and missed detections"
+  journal: "The Journal of the Acoustical Society of America"
+  volume: 150
+  issue: 5
+  start: 3399
+  end: 3416
+  year: 2021
